@@ -10,26 +10,26 @@ class DragonCreature extends mythicalCreature {
     }
 }
 
-class BasiliskCreature extends mythicalCreature {
-    BasiliskCreature() {
+class Basilisk extends mythicalCreature {
+    Basilisk() {
         super("Basilisk", 165, 15, 11, 10, 12);
     }
 }
 
-class HydraCreature extends mythicalCreature {
-    HydraCreature() {
+class Hydra extends mythicalCreature {
+    Hydra() {
         super("Hydra", 205, 12, 16, 15, 11);
     }
 }
 
-class PhoenixCreature extends mythicalCreature {
-    PhoenixCreature() {
+class Phoenix extends mythicalCreature {
+    Phoenix() {
         super("Phoenix", 275, 17, 13, 17, 19);
     }
 }
 
-class PegasusCreature extends mythicalCreature {
-    PegasusCreature() {
+class Pegasus extends mythicalCreature {
+    Pegasus() {
         super("Pegasus", 340, 14, 18, 20, 20);
     }
 }
