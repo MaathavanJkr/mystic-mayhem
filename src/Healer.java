@@ -1,3 +1,9 @@
+public class Healer extends Character{
+    Healer(String name, int price, int attack, int defence, int health, int speed) {
+        super(name, price, attack, defence, health, speed);
+    }
+}
+
 class Soother extends Healer {
     Soother() {
         super("Soother", 95, 10, 8, 9, 6);
