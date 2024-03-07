@@ -53,6 +53,159 @@ public class MysticMayhem {
         Player player = new Player(name, username, playerCount++);
         players.add(player);
         System.out.println("Player created successfully!");
+
+        while (true) {
+            System.out.println("Choose an archer:\n1. Shooter\n2. Ranger\n3. Sunfire\n4. Zing\n5. Sagittarius");
+            int archerChoice = getChoice();
+            Archer archer = null;
+            switch (archerChoice) {
+                case 1:
+                    System.out.println("You chose Shooter.");
+                    archer = new Shooter();
+                    break;
+                case 2:
+                    System.out.println("You chose Ranger.");
+                    archer = new Ranger();
+                    break;
+                case 3:
+                    System.out.println("You chose Sunfire.");
+                    archer = new Sunfire();
+                    break;
+                case 4:
+                    System.out.println("You chose Zing.");
+                    archer = new Zing();
+                    break;
+                case 5:
+                    System.out.println("You chose Sagittarius.");
+                    archer = new Saggitarius();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+    
+            // Choose a Knight
+            System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3. Swiftblade\n4. Templar\n5. Zoro");
+            int knightChoice = getChoice();
+            Knight knight = null;
+            switch (knightChoice) {
+                case 1:
+                    System.out.println("You chose Cavalier.");
+                    knight = new Cavalier();
+                    break;
+                case 2:
+                    System.out.println("You chose Squire.");
+                    knight = new Squire();
+                    break;
+                case 3:
+                    System.out.println("You chose Swiftblade.");
+                    knight = new Swiftblade();
+                    break;
+                case 4:
+                    System.out.println("You chose Templar.");
+                    knight = new Templar();
+                    break;
+                case 5:
+                    System.out.println("You chose Zoro.");
+                    knight = new Zoro();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+    
+            // Choose a Mage
+            System.out.println("Choose a mage:\n1. Conjurer\n2. Eldritch\n3. Enchanter\n4. Illusionist\n5. Warlock");
+            int mageChoice = getChoice();
+            Mage mage = null;
+            switch (mageChoice) {
+                case 1:
+                    System.out.println("You chose Conjurer.");
+                    mage = new Conjurer();
+                    break;
+                case 2:
+                    System.out.println("You chose Eldritch.");
+                    mage = new Eldritch();
+                    break;
+                case 3:
+                    System.out.println("You chose Enchanter.");
+                    mage = new Enchanter();
+                    break;
+                case 4:
+                    System.out.println("You chose Illusionist.");
+                    mage = new Illusionist();
+                    break;
+                case 5:
+                    System.out.println("You chose Warlock.");
+                    mage = new Warlock();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+    
+            // Choose a Healer
+            System.out.println("Choose a healer:\n1. Alchemist\n2. Lightbringer\n3. Medic\n4. Saint\n5. Soother");
+            int healerChoice = getChoice();
+            Healer healer = null;
+            switch (healerChoice) {
+                case 1:
+                    System.out.println("You chose Alchemist.");
+                    healer = new Alchemist();
+                    break;
+                case 2:
+                    System.out.println("You chose Lightbringer.");
+                    healer = new Lightbringer();
+                    break;
+                case 3:
+                    System.out.println("You chose Medic.");
+                    healer = new Medic();
+                    break;
+                case 4:
+                    System.out.println("You chose Saint.");
+                    healer = new Saint();
+                    break;
+                case 5:
+                    System.out.println("You chose Soother.");
+                    healer = new Soother();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+    
+            // Choose a Mythical Creature
+            System.out.println("Choose a mythical creature:\n1. Basilisk\n2. Dragon\n3. Hydra\n4. Pegasus\n5. Phoenix");
+            int creatureChoice = getChoice();
+            MythicalCreature creature = null;
+            switch (creatureChoice) {
+                case 1:
+                    System.out.println("You chose Basilisk.");
+                    creature = new Basilisk();
+                    break;
+                case 2:
+                    System.out.println("You chose Dragon.");
+                    creature = new Dragon();
+                    break;
+                case 3:
+                    System.out.println("You chose Hydra.");
+                    creature = new Hydra();
+                    break;
+                case 4:
+                    System.out.println("You chose Pegasus.");
+                    creature = new Pegasus();
+                    break;
+                case 5:
+                    System.out.println("You chose Phoenix.");
+                    creature = new Phoenix();
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+    
+            if (archer.price + knight.price + mage.price + healer.price + creature.price <= 500) {
+                player.createArmy(archer, knight, mage, healer, creature);
+                break;
+            } else {
+                System.out.println("Total price exceeds 500 gold. Please choose again.");
+            }
+        }
     }
 
     private static void selectPlayer() {
@@ -78,5 +231,22 @@ public class MysticMayhem {
             }
         }
         return true;
+    }
+
+    private static int getChoice() {
+        int choice = 0;
+        while (true) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice >= 1 && choice <= 5) {
+                    break;
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+        return choice;
     }
 }
