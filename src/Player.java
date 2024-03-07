@@ -1,35 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PlayerDatabase {
-    private static int nextID = 1;
-    private static ArrayList<String> usernames;
-    protected static ArrayList<Player> players;
-
-    Scanner scanner = new Scanner(System.in);
-
-    public void addPlayer() {
-        System.out.println("Enter a name: ");
-        String name = scanner.nextLine();
-
-        String username = "";
-        boolean validUserName = false;
-        while (!validUserName) {
-            System.out.println("Enter a valid username: ");
-            username = scanner.nextLine();
-            if (usernames.contains(username)) {
-                System.out.println("username already exists");
-            } else
-                validUserName = true;
-        }
-
-        Player player = new Player(name, username, nextID++);
-        usernames.add(username);
-        players.add(player);
-        System.out.println("player successfully created");
-    }
-}
-
 class Player {
 
     private String name;
@@ -50,7 +21,7 @@ class Player {
 
     private Healer healer;
 
-    private mythicalCreature mythicalCreature;
+    private MythicalCreature mythicalCreature;
 
     public Player(String name, String username, int userID) {
         this.name = name;
