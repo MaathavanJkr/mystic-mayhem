@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class Player {
 
     private String name;
@@ -12,6 +14,7 @@ class Player {
     private Healer healer;
     private MythicalCreature mythicalCreature;
     private Homeground homeground;
+    private ArrayList<Character> characters = new ArrayList<>();
 
     public Player(String name, String username, int userID) {
         this.name = name;
@@ -48,8 +51,8 @@ class Player {
         return this.gold;
     }
 
-    public void changeGold(int gold) {
-        this.gold += gold;
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
     public Archer getArcher() {
@@ -100,20 +103,44 @@ class Player {
         this.homeground = homeground;
     }
 
+    public void buyCharacter(Character character) {
+        if (this.gold >= character.getPrice()) {
+            this.gold -= character.getPrice();
+            addCharacter(character);
+        } else {
+            System.out.println("Not enough gold");
+        }
+    }
+
     public void createArmy(Archer archer, Knight knight, Mage mage, Healer healer, MythicalCreature mythicalCreature) {
         this.archer = archer;
         this.knight = knight;
         this.mage = mage;
         this.healer = healer;
         this.mythicalCreature = mythicalCreature;
+
+        buyCharacter(archer);
+        buyCharacter(knight);
+        buyCharacter(mage);
+        buyCharacter(healer);
+        buyCharacter(mythicalCreature);
+    }
+
+    public void displayInfo() {
+        System.out.println("\nName: " + this.name);
+        System.out.println("XP: " + this.XP);
+        System.out.println("Archer: " + this.archer.getName());
+        System.out.println("Knight: " + this.knight.getName());
+        System.out.println("Mage: " + this.mage.getName());
+        System.out.println("Healer: " + this.healer.getName());
+        System.out.println("Mythical Creature: " + this.mythicalCreature.getName());
     }
 
     public void afterCombat(String result) {
 
     }
 
-    public void buyCharacter(Character character) {
-        gold -= character.price;
-
+    public void addCharacter(Character character) {
+        this.characters.add(character);
     }
 }
