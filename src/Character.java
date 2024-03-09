@@ -5,6 +5,7 @@ public abstract class Character {
     int attack;
     int defence;
     int health;
+    int battleHealth;
     int speed;
     String category;
 
@@ -41,6 +42,18 @@ public abstract class Character {
         return this.health;
     }
 
+    public int getBattleHealth() {
+        return this.battleHealth;
+    }
+
+    public void setBattleHealth(int battleHealth) {
+        this.battleHealth = battleHealth;
+    }
+
+    public void resetBattleHealth() {
+        this.battleHealth = this.health;
+    }
+    
     public int getSpeed() {
         return this.speed;
     }

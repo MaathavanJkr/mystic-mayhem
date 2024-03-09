@@ -42,9 +42,13 @@ class Player {
     public int getXP() {
         return this.XP;
     }
+    
+    public void setXP(int XP) {
+        this.XP = XP;
+    }
 
-    public void changeXP(int XP) {
-        this.XP += XP;
+    public void addXP() {
+        this.XP += 1;
     }
 
     public int getGold() {
@@ -136,8 +140,14 @@ class Player {
         System.out.println("Mythical Creature: " + this.mythicalCreature.getName());
     }
 
-    public void afterCombat(String result) {
-
+    public ArrayList<Character> getArmy() {
+        ArrayList<Character> army = new ArrayList<>();
+        army.add(this.archer);
+        army.add(this.knight);
+        army.add(this.mage);
+        army.add(this.healer);
+        army.add(this.mythicalCreature);
+        return army;
     }
 
     public void addCharacter(Character character) {
