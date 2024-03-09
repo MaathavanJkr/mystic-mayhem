@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 class Player {
 
     private String name;
@@ -9,14 +6,12 @@ class Player {
 
     private int XP;
     private int gold;
-    private Homeground homeground;
     private Archer archer;
     private Knight knight;
     private Mage mage;
     private Healer healer;
     private MythicalCreature mythicalCreature;
-
-    private static Scanner scanner = new Scanner(System.in);
+    private Homeground homeground;
 
     public Player(String name, String username, int userID) {
         this.name = name;
@@ -41,21 +36,68 @@ class Player {
         return this.userID;
     }
 
-    public void initialGold() {
-        this.gold = 500;
+    public int getXP() {
+        return this.XP;
+    }
+
+    public void changeXP(int XP) {
+        this.XP += XP;
+    }
+
+    public int getGold() {
+        return this.gold;
     }
 
     public void changeGold(int gold) {
         this.gold += gold;
     }
 
-    public void afterCombat(String result) {
-
+    public Archer getArcher() {
+        return this.archer;
     }
 
-    public void buyCharacter(Character character) {
-        gold -= character.price;
+    public void setArcher(Archer archer) {
+        this.archer = archer;
+    }
 
+    public Knight getKnight() {
+        return this.knight;
+    }
+
+    public void setKnight(Knight knight) {
+        this.knight = knight;
+    }
+
+    public Mage getMage() {
+        return this.mage;
+    }
+
+    public void setMage(Mage mage) {
+        this.mage = mage;
+    }
+
+    public Healer getHealer() {
+        return this.healer;
+    }
+
+    public void setHealer(Healer healer) {
+        this.healer = healer;
+    }
+
+    public MythicalCreature getMythicalCreature() {
+        return this.mythicalCreature;
+    }
+
+    public void setMythicalCreature(MythicalCreature mythicalCreature) {
+        this.mythicalCreature = mythicalCreature;
+    }
+
+    public Homeground getHomeground() {
+        return this.homeground;
+    }
+
+    public void setHomeground(Homeground homeground) {
+        this.homeground = homeground;
     }
 
     public void createArmy(Archer archer, Knight knight, Mage mage, Healer healer, MythicalCreature mythicalCreature) {
@@ -66,7 +108,12 @@ class Player {
         this.mythicalCreature = mythicalCreature;
     }
 
-    public void setHomeground(Homeground homeground) {
-        this.homeground = homeground;
+    public void afterCombat(String result) {
+
+    }
+
+    public void buyCharacter(Character character) {
+        gold -= character.price;
+
     }
 }

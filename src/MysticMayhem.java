@@ -15,7 +15,7 @@ public class MysticMayhem {
             System.out.println("1. Create Player");
             System.out.println("2. Select Player");
             System.out.println("3. Search for Opponent");
-            System.out.println("4. Exit");
+            System.out.println("4. Buy Equipments");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -31,10 +31,12 @@ public class MysticMayhem {
                     searchOpponent();
                     break;
                 case 4:
+                    buyEquipments();
+                    break;
+                default:
+                    // System.out.println("Invalid choice. Please try again.");
                     System.out.println("Exiting...");
                     return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -221,6 +223,31 @@ public class MysticMayhem {
     private static void searchOpponent() {
         System.out.println("Current Player: " + currentPlayer.getName());
         System.out.println("Searching for opponent...");
+    }
+
+    private static void buyEquipments() {
+        System.out.println("Choose a character to buy artifacts for:\n1. Archer\n2. Knight\n3. Mage\n4. Healer\n5. Mythical Creature");
+        int choice = getChoice();
+        Character character = null;
+        switch (choice) {
+            case 1:
+                System.out.println("You chose Archer.");
+                break;
+            case 2:
+                System.out.println("You chose Knight.");
+                break;
+            case 3:
+                System.out.println("You chose Mage.");
+                break;
+            case 4:
+                System.out.println("You chose Healer.");
+                break;
+            case 5:
+                System.out.println("You chose Mythical Creature.");
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
     }
 
     private static boolean isUsernameUnique(String username) {
