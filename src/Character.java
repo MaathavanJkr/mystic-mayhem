@@ -42,6 +42,8 @@ public abstract class Character {
         return this.price;
     }
 
+    public int changePrice(int change) {return this.price+=change;}
+
     public int getAttack() {
         return this.attack;
     }
@@ -152,7 +154,7 @@ public abstract class Character {
         this.health -= this.artefact.health;
         this.speed -= this.artefact.speed;
 
-        // this.price -= this.artifact.price * 0.2;
+        this.price -= this.artefact.price * 0.2;
         this.artefact = null;
     }
 
