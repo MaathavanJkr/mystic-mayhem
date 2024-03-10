@@ -30,7 +30,22 @@ public class Battle {
         
         //loop 20 times
         for (int i = 0; i < 20; i++) {
-            attack(i%2, i%2 == 0 ? 1 : 0);
+            int attackPlayer = i%2;
+            int defendPlayer = i%2 == 0 ? 1 : 0;
+
+            //print turn and attacker name
+            System.out.println("Turn " + (i+1) + ": " + players.get(attackPlayer).getName());
+            attack(attackPlayer, defendPlayer);
+
+            if (armies.get(defendPlayer).size() == 0) {
+                endBattle(attackPlayer, defendPlayer);
+                break;
+            }
+        }
+
+        //if no one wins, print draw
+        if (armies.get(0).size() != 0 && armies.get(1).size() != 0) {
+            System.out.println("Draw!");
         }
 
     }
@@ -46,15 +61,14 @@ public class Battle {
             battleHealth = 0;
         }
         defender.setBattleHealth(battleHealth);
-        System.out.println(attacker.getName() + " attacked " + defender.getName() + " for " + damage + " damage");
+        System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
 
+        //print defending character's health and attacking character's health
+        System.out.println(defender.getName() + "'s Health: " + defender.getBattleHealth());
+        System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
         if (defender.getBattleHealth() == 0) {
-            System.out.println(defender.getName() + " is dead.");
+            System.out.println(defender.getName() + " died!");
             armies.get(defendPlayer).remove(defender);
-
-            if (armies.get(defendPlayer).size() == 0) {
-                System.out.println(players.get(attackPlayer).getName() + " has won the battle");
-            }
         }
     }
 

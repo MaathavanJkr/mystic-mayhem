@@ -11,6 +11,9 @@ public class MysticMayhem {
 
     public void startGame() {
         System.out.println("Welcome to Mystic Mayhem Game!");
+
+        addDemoData();
+
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1. Create Player");
@@ -406,5 +409,26 @@ public class MysticMayhem {
             }
         }
         return choice;
+    }
+
+    private static void addDemoData() {
+        Player player1 = new Player("Umen", "umen", playerCount++);
+        player1.setGold(10000);
+        players.add(player1);
+        player1.createArmy(new Shooter(), new Cavalier(), new Conjurer(), new Alchemist(), new Basilisk());
+        Player player2 = new Player("Ilampoornan", "ilam", playerCount++);
+        player2.setGold(10000);
+        players.add(player2);
+        player2.createArmy(new Ranger(), new Squire(), new Eldritch(), new Lightbringer(), new Dragon());
+        Player player3 = new Player("Varun", "varun", playerCount++);
+        player3.setGold(10000);
+        players.add(player3);
+        player3.createArmy(new Sunfire(), new Swiftblade(), new Enchanter(), new Medic(), new Hydra());
+        Player player4 = new Player("Maathavan", "maathavan", playerCount++);
+        player4.setGold(10000);
+        players.add(player4);
+        player4.createArmy(new Zing(), new Templar(), new Illusionist(), new Saint(), new Pegasus());
+
+        currentPlayer = player4;
     }
 }

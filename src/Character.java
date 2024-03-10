@@ -18,6 +18,7 @@ public abstract class Character {
         this.attack = attack;
         this.defence = defence;
         this.health = health;
+        this.battleHealth = health;
         this.speed = speed;
         this.category = category;
     }
@@ -53,7 +54,7 @@ public abstract class Character {
     public void resetBattleHealth() {
         this.battleHealth = this.health;
     }
-    
+
     public int getSpeed() {
         return this.speed;
     }
