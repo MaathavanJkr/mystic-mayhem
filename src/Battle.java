@@ -54,6 +54,7 @@ public class Battle {
         Character attacker = getFastest(armies.get(attackPlayer));
 
         if (attacker instanceof Healer) {
+
             Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
 
             int healHealth = (int) (0.1 * attacker.getAttack());

@@ -59,6 +59,8 @@ class Player {
         this.gold = gold;
     }
 
+    public void changeGold(int change){this.gold+=change;}
+
     public Archer getArcher() {
         return this.archer;
     }
