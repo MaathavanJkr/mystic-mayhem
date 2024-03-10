@@ -71,7 +71,7 @@ public class Battle {
 
             Character defender = getLowestDefence(armies.get(defendPlayer));
 
-            int damage = (int) ((0.5 * attacker.getAttack() - 0.1 * defender.getDefence())*factor);
+            int damage = (int) ((0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence())*factor);
             int battleHealth = defender.getBattleHealth() - damage;
 
             if (battleHealth < 0) {
@@ -92,6 +92,7 @@ public class Battle {
 
         String homeground = players.get(1).getHomeground();
         if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
+            System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
             attack(attackPlayer, defendPlayer, 0.2);
         }
 
@@ -103,7 +104,7 @@ public class Battle {
     public Character getFastest(ArrayList<Character> army) {
         Character fastest = army.get(0);
         for (Character character : army) {
-            if (character.getSpeed() > fastest.getSpeed()) {
+            if (character.getBattleSpeed() > fastest.getBattleSpeed()) {
                 fastest = character;
             }
             // Include Priority order here
@@ -114,7 +115,7 @@ public class Battle {
     public Character getLowestDefence(ArrayList<Character> army) {
         Character lowestDefence = army.get(0);
         for (Character character : army) {
-            if (character.getDefence() < lowestDefence.getDefence()) {
+            if (character.getBattleDefence() < lowestDefence.getBattleDefence()) {
                 lowestDefence = character;
             }
         }
