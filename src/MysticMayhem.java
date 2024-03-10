@@ -21,6 +21,7 @@ public class MysticMayhem {
             System.out.println("3. Search for Opponent");
             System.out.println("4. Buy Equipments");
             System.out.println("5. Current Player Info");
+            System.out.println("6. Battle Basic with WHitewolf");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -40,6 +41,9 @@ public class MysticMayhem {
                     break;
                 case 5:
                     currentPlayerInfo();
+                    break;
+                case 6:
+                    battleBasicWithWhitewolf();
                     break;
                 default:
                     // System.out.println("Invalid choice. Please try again.");
@@ -63,6 +67,24 @@ public class MysticMayhem {
         Player player = new Player(name, username, playerCount++);
         players.add(player);
         System.out.println("Player created successfully!");
+
+        // choose homeground
+        System.out.println("Choose a Homeground:\n1. Hillcrest\n2. Marshland\n3. Desert\n4. Arcane");
+        int homegroundChoice = getChoice(4);
+        switch (homegroundChoice) {
+            case 1:
+                player.setHomeground("Hillcrest");
+                break;
+            case 2:
+                player.setHomeground("Marshland");
+                break;
+            case 3:
+                player.setHomeground("Desert");
+                break;
+            case 4:
+                player.setHomeground("Arcane");
+                break;
+        }
 
         while (true) {
             // Choose an Archer, diplay archers with their price
@@ -249,11 +271,11 @@ public class MysticMayhem {
 
         for (Player opponent : opponents) {
             opponent.displayInfo();
-            //choose to battle or skip
+            // choose to battle or skip
             System.out.println("Do you want to battle with " + opponent.getUsername() + "?\n1. Yes\n2. No");
             int choice = getChoice(2);
             if (choice == 1) {
-                //battle
+                // battle
                 Battle battle = new Battle(currentPlayer, opponent);
                 battle.start();
                 break;
@@ -261,7 +283,7 @@ public class MysticMayhem {
                 System.out.println("Skipping " + opponent.getUsername() + "...");
             }
         }
-        
+
     }
 
     private static void buyEquipments() {
@@ -355,7 +377,7 @@ public class MysticMayhem {
             default:
                 System.out.println("Invalid choice.");
         }
-        
+
         if (artefact != null) {
             if (currentPlayer.getGold() >= artefact.price) {
                 character.setArtefact(artefact);
@@ -381,8 +403,15 @@ public class MysticMayhem {
         System.out.println("Mage: " + currentPlayer.getMage().getCharacterInfo());
         System.out.println("Healer: " + currentPlayer.getHealer().getCharacterInfo());
         System.out.println("Mythical Creature: " + currentPlayer.getMythicalCreature().getCharacterInfo());
+        System.out.println("Homeground: " + currentPlayer.getHomeground());
     }
 
+    private static void battleBasicWithWhitewolf() {
+        Player basicPlayer = players.get(4);
+        Player whitewolf = players.get(5);
+        Battle battle = new Battle(basicPlayer, whitewolf);
+        battle.start();
+    }
 
     private static boolean isUsernameUnique(String username) {
         for (Player player : players) {
@@ -414,20 +443,37 @@ public class MysticMayhem {
     private static void addDemoData() {
         Player player1 = new Player("Umen", "umen", playerCount++);
         player1.setGold(10000);
+        player1.setHomeground("Hillcrest");
         players.add(player1);
         player1.createArmy(new Shooter(), new Cavalier(), new Conjurer(), new Alchemist(), new Basilisk());
         Player player2 = new Player("Ilampoornan", "ilam", playerCount++);
         player2.setGold(10000);
+        player2.setHomeground("Marshland");
         players.add(player2);
         player2.createArmy(new Ranger(), new Squire(), new Eldritch(), new Lightbringer(), new Dragon());
         Player player3 = new Player("Varun", "varun", playerCount++);
         player3.setGold(10000);
+        player3.setHomeground("Desert");
         players.add(player3);
         player3.createArmy(new Sunfire(), new Swiftblade(), new Enchanter(), new Medic(), new Hydra());
         Player player4 = new Player("Maathavan", "maathavan", playerCount++);
         player4.setGold(10000);
+        player4.setHomeground("Hillcrest");
         players.add(player4);
         player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
+
+        Player basicPlayer = new Player("Basic", "basic", playerCount++);
+        player1.setHomeground("Hillcrest");
+        players.add(basicPlayer);
+        basicPlayer.createArmy(new Shooter(), new Squire(), new Warlock(), new Soother(), new Dragon());
+
+        Player whitewolf = new Player("GeraltofRivia", "whitewolf", playerCount++);
+        player4.setGold(10000);
+        whitewolf.setHomeground("Marshland");
+        players.add(whitewolf);
+        whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
+        whitewolf.getArcher().setArmour(new Chainmail());
+        whitewolf.getHealer().setArtefact(new Amulet());
 
         currentPlayer = player4;
     }
