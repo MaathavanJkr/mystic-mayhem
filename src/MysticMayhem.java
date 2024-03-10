@@ -427,7 +427,7 @@ public class MysticMayhem {
         Player player4 = new Player("Maathavan", "maathavan", playerCount++);
         player4.setGold(10000);
         players.add(player4);
-        player4.createArmy(new Zing(), new Templar(), new Illusionist(), new Saint(), new Pegasus());
+        player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
 
         currentPlayer = player4;
     }

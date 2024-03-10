@@ -10,7 +10,7 @@ public abstract class Character {
     String category;
 
     Armour armour;
-    Artefact artifact;
+    Artefact artefact;
 
     Character(String name, int price, int attack, int defence, int health, int speed, String category) {
         this.name = name;
@@ -78,6 +78,9 @@ public abstract class Character {
     }
 
     public void removeArmour() {
+        if (this.armour == null) {
+            return;
+        }
         this.defence -= this.armour.defence;
         this.health -= this.armour.health;
         this.speed -= this.armour.speed;
@@ -86,13 +89,13 @@ public abstract class Character {
         this.armour = null;
     }
 
-    public Artefact getArtifact() {
-        return this.artifact;
+    public Artefact getArtefact() {
+        return this.artefact;
     }
 
     public void setArtefact(Artefact artefact) {
         removeArtefact();
-        this.artifact = artefact;
+        this.artefact = artefact;
         this.attack += artefact.attack;
         this.defence += artefact.defence;
         this.health += artefact.health;
@@ -102,13 +105,16 @@ public abstract class Character {
     }
 
     public void removeArtefact() {
-        this.attack -= this.artifact.attack;
-        this.defence -= this.artifact.defence;
-        this.health -= this.artifact.health;
-        this.speed -= this.artifact.speed;
+        if (artefact == null) {
+            return;
+        }
+        this.attack -= this.artefact.attack;
+        this.defence -= this.artefact.defence;
+        this.health -= this.artefact.health;
+        this.speed -= this.artefact.speed;
 
         // this.price -= this.artifact.price * 0.2;
-        this.artifact = null;
+        this.artefact = null;
     }
 
     public String getCharacterInfo() {
@@ -118,8 +124,8 @@ public abstract class Character {
             outputString += " + " + this.armour.name;
         }
 
-        if (this.artifact != null) {
-            outputString += " + " + this.artifact.name;
+        if (this.artefact != null) {
+            outputString += " + " + this.artefact.name;
         }
         return outputString;
     }
