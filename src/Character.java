@@ -2,11 +2,17 @@ public abstract class Character {
 
     String name;
     int price;
+
     int attack;
     int defence;
     int health;
-    int battleHealth;
     int speed;
+
+    int battleAttack;
+    int battleDefence;
+    int battleHealth;
+    int battleSpeed;
+
     String category;
 
     Armour armour;
@@ -18,8 +24,13 @@ public abstract class Character {
         this.attack = attack;
         this.defence = defence;
         this.health = health;
-        this.battleHealth = health;
         this.speed = speed;
+
+        this.battleAttack = attack;
+        this.battleDefence = defence;
+        this.battleHealth = health;
+        this.battleSpeed = speed;
+
         this.category = category;
     }
 
@@ -43,6 +54,22 @@ public abstract class Character {
         return this.health;
     }
 
+    public int getBattleAttack() {
+        return this.battleAttack;
+    }
+
+    public void setBattleAttack(int battleAttack) {
+        this.battleAttack = battleAttack;
+    }
+
+    public int getBattleDefence() {
+        return this.battleDefence;
+    }
+
+    public void setBattleDefence(int battleDefence) {
+        this.battleDefence = battleDefence;
+    }
+
     public int getBattleHealth() {
         return this.battleHealth;
     }
@@ -51,8 +78,20 @@ public abstract class Character {
         this.battleHealth = battleHealth;
     }
 
-    public void resetBattleHealth() {
+    public int getBattleSpeed() {
+        return this.battleSpeed;
+    }
+
+    public void setBattleSpeed(int battleSpeed) {
+        this.battleSpeed = battleSpeed;
+    }
+    
+    
+    public void resetBattleStats() {
+        this.battleAttack = this.attack;
+        this.battleDefence = this.defence;
         this.battleHealth = this.health;
+        this.battleSpeed = this.speed;
     }
 
     public int getSpeed() {

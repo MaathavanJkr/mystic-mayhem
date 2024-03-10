@@ -26,6 +26,9 @@ public class Battle {
     }
 
     public void start() {
+
+        setHomelandStats();
+
         System.out.println("Battle started between " + players.get(0).getName() + " and " + players.get(1).getName());
 
         // loop 20 times
@@ -50,16 +53,17 @@ public class Battle {
 
     }
 
-    public void attack(int attackPlayer, int defendPlayer) {
+    public void attack(int attackPlayer, int defendPlayer, double factor) {
         Character attacker = getFastest(armies.get(attackPlayer));
 
         if (attacker instanceof Healer) {
             Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
 
-            int healHealth = (int) (0.1 * attacker.getAttack());
+            int healHealth = (int) (0.1 * attacker.getAttack() * factor);
             toBeHealed.setBattleHealth(toBeHealed.getBattleHealth() + healHealth);
 
-            System.out.println(attacker.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
+            System.out
+                    .println(attacker.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
 
             System.out.println(toBeHealed.getName() + "'s Health: " + toBeHealed.getBattleHealth());
             System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
@@ -67,8 +71,9 @@ public class Battle {
 
             Character defender = getLowestDefence(armies.get(defendPlayer));
 
-            int damage = (int) (0.5 * attacker.getAttack() - 0.1 * defender.getDefence());
+            int damage = (int) ((0.5 * attacker.getAttack() - 0.1 * defender.getDefence())*factor);
             int battleHealth = defender.getBattleHealth() - damage;
+
             if (battleHealth < 0) {
                 battleHealth = 0;
             }
@@ -83,8 +88,18 @@ public class Battle {
                 armies.get(defendPlayer).remove(defender);
             }
         }
+        
+
+        String homeground = players.get(1).getHomeground();
+        if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
+            attack(attackPlayer, defendPlayer, 0.2);
+        }
+
     }
 
+    public void attack(int attackPlayer, int defendPlayer) {
+        attack(attackPlayer, defendPlayer, 1);
+    }
     public Character getFastest(ArrayList<Character> army) {
         Character fastest = army.get(0);
         for (Character character : army) {
@@ -116,10 +131,68 @@ public class Battle {
         return lowestHealth;
     }
 
-    public void resetBattleHealths() {
+    public void setHomelandStats() {
+        String homeground = players.get(1).getHomeground();
         for (ArrayList<Character> army : armies) {
             for (Character character : army) {
-                character.resetBattleHealth();
+                switch (homeground) {
+                    case "Hillcrest":
+                        switch (character.getCategory()) {
+                            case "Highlanders":
+                                character.setBattleAttack(character.getBattleAttack() + 1);
+                                character.setBattleDefence(character.getBattleDefence() + 1);
+                                break;
+                            case "Sunchildren":
+                            case "Marshlanders":
+                                character.setBattleSpeed(character.getBattleSpeed() - 1);
+                                break;
+                        }
+                        break;
+                    case "Marshland":
+                        switch (character.getCategory()) {
+                            case "Marshlanders":
+                                character.setBattleDefence(character.getBattleDefence() + 2);
+                                break;
+                            case "Sunchildren":
+                                character.setBattleAttack(character.getBattleAttack() - 1);
+                                break;
+                            case "Highlanders":
+                                character.setBattleSpeed(character.getBattleSpeed() - 1);
+                                break;
+                        }
+                        break;
+                    case "Desert":
+                        switch (character.getCategory()) {
+                            case "Marshlanders":
+                                character.setBattleHealth(character.getBattleHealth() - 1);
+                                break;
+                            case "Sunchildren":
+                                character.setBattleAttack(character.getBattleAttack() + 1);
+                                break;
+                        }
+                    case "Arcane":
+                        switch (character.getCategory()) {
+                            case "Mystics":
+                                character.setBattleAttack(character.getBattleAttack() + 2);
+                                character.setBattleHealth((int) (character.getBattleHealth() * 1.1));
+                                break;
+                            case "Marshlanders":
+                            case "Highlanders":
+                                character.setBattleSpeed(character.getBattleSpeed() - 1);
+                                character.setBattleDefence(character.getBattleDefence() - 1);
+                                break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    public void resetAllBattleStats() {
+        for (ArrayList<Character> army : armies) {
+            for (Character character : army) {
+                character.resetBattleStats();
             }
         }
     }
@@ -128,6 +201,6 @@ public class Battle {
         System.out.println(players.get(winner).getName() + " won!");
 
         players.get(winner).addXP();
-        resetBattleHealths();
+        resetAllBattleStats();
     }
 }

@@ -13,7 +13,7 @@ class Player {
     private Mage mage;
     private Healer healer;
     private MythicalCreature mythicalCreature;
-    private Homeground homeground;
+    private String homeground;
     private ArrayList<Character> characters = new ArrayList<>();
 
     public Player(String name, String username, int userID) {
@@ -99,11 +99,11 @@ class Player {
         this.mythicalCreature = mythicalCreature;
     }
 
-    public Homeground getHomeground() {
+    public String getHomeground() {
         return this.homeground;
     }
 
-    public void setHomeground(Homeground homeground) {
+    public void setHomeground(String homeground) {
         this.homeground = homeground;
     }
 
