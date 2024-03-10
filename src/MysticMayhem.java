@@ -21,6 +21,7 @@ public class MysticMayhem {
             System.out.println("3. Search for Opponent");
             System.out.println("4. Buy Equipments");
             System.out.println("5. Current Player Info");
+            System.out.println("6. Battle Basic with WHitewolf");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -40,6 +41,9 @@ public class MysticMayhem {
                     break;
                 case 5:
                     currentPlayerInfo();
+                    break;
+                case 6:
+                    battleBasicWithWhitewolf();
                     break;
                 default:
                     // System.out.println("Invalid choice. Please try again.");
@@ -402,6 +406,13 @@ public class MysticMayhem {
         System.out.println("Homeground: " + currentPlayer.getHomeground());
     }
 
+    private static void battleBasicWithWhitewolf() {
+        Player basicPlayer = players.get(4);
+        Player whitewolf = players.get(5);
+        Battle battle = new Battle(basicPlayer, whitewolf);
+        battle.start();
+    }
+
     private static boolean isUsernameUnique(String username) {
         for (Player player : players) {
             if (player.getUsername().equals(username)) {
@@ -450,6 +461,19 @@ public class MysticMayhem {
         player4.setHomeground("Hillcrest");
         players.add(player4);
         player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
+
+        Player basicPlayer = new Player("Basic", "basic", playerCount++);
+        player1.setHomeground("Hillcrest");
+        players.add(basicPlayer);
+        basicPlayer.createArmy(new Shooter(), new Squire(), new Warlock(), new Soother(), new Dragon());
+
+        Player whitewolf = new Player("GeraltofRivia", "whitewolf", playerCount++);
+        player4.setGold(10000);
+        whitewolf.setHomeground("Marshland");
+        players.add(whitewolf);
+        whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
+        whitewolf.getArcher().setArmour(new Chainmail());
+        whitewolf.getHealer().setArtefact(new Amulet());
 
         currentPlayer = player4;
     }
