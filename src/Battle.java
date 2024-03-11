@@ -60,8 +60,8 @@ public class Battle {
 
             Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
 
-            int healHealth = (int) (0.1 * attacker.getAttack() * factor);
-            toBeHealed.setBattleHealth(toBeHealed.getBattleHealth() + healHealth);
+            double healHealth = roundToFirstDecimal (0.1 * attacker.getAttack() * factor);
+            toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
 
             System.out
                     .println(attacker.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
@@ -72,8 +72,8 @@ public class Battle {
 
             Character defender = getLowestDefence(armies.get(defendPlayer));
 
-            int damage = (int) ((0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence())*factor);
-            int battleHealth = defender.getBattleHealth() - damage;
+            double damage = roundToFirstDecimal((0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence())*factor);
+            double battleHealth = roundToFirstDecimal(defender.getBattleHealth() - damage);
 
             if (battleHealth < 0) {
                 battleHealth = 0;
@@ -204,5 +204,9 @@ public class Battle {
 
         players.get(winner).addXP();
         resetAllBattleStats();
+    }
+
+    public static double roundToFirstDecimal(double number) {
+        return Math.round(number * 10.0) / 10.0;
     }
 }
