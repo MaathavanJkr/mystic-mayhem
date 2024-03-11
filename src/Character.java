@@ -1,6 +1,7 @@
 public abstract class Character {
 
     String name;
+    String type;
     int price;
 
     double attack;
@@ -18,8 +19,9 @@ public abstract class Character {
     Armour armour;
     Artefact artefact;
 
-    Character(String name, int price, int attack, int defence, int health, int speed, String category) {
+    Character(String type, String name, int price, int attack, int defence, int health, int speed, String category) {
         this.name = name;
+        this.type = type;
         this.price = price;
         this.attack = attack;
         this.defence = defence;
@@ -36,6 +38,10 @@ public abstract class Character {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public int getPrice() {

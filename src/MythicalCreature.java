@@ -1,6 +1,6 @@
 public class MythicalCreature extends Character {
     MythicalCreature(String name, int price, int attack, int defence, int health, int speed, String category) {
-        super(name, price, attack, defence, health, speed, category);
+        super("MythicalCreature", name, price, attack, defence, health, speed, category);
     }
 }
 

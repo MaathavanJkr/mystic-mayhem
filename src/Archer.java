@@ -1,6 +1,6 @@
 public class Archer extends Character {
     Archer(String name, int price, int attack, int defence, int health, int speed, String category) {
-        super(name, price, attack, defence, health, speed, category);
+        super("Archer", name , price, attack, defence, health, speed, category);
     }
 }
 

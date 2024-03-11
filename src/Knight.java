@@ -2,7 +2,7 @@ public class Knight extends Character {
     static boolean knightInstance = false;
 
     Knight(String name, int price, int attack, int defence, int health, int speed, String category) {
-        super(name, price, attack, defence, health, speed, category);
+        super("Knight", name, price, attack, defence, health, speed, category);
     }
 
     static void setKnightInstance() {

@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Battle {
     // Player player1;
@@ -28,21 +31,25 @@ public class Battle {
     public void start() {
 
         setHomelandStats();
+        sortArmies();
 
-        System.out.println("Battle started between " + players.get(0).getName() + " and " + players.get(1).getName());
+        System.out.println(
+                "\nBattle started between " + players.get(0).getName() + " and " + players.get(1).getName() + "\n");
 
         // loop 20 times
-        for (int i = 0; i < 20; i++) {
-            int attackPlayer = i % 2;
-            int defendPlayer = i % 2 == 0 ? 1 : 0;
+        for (; turn < 10; turn++) {
+            for (int i = 0; i < 2; i++) {
+                int attackPlayer = i;
+                int defendPlayer = i == 0 ? 1 : 0;
 
-            // print turn and attacker name
-            System.out.println("Turn " + (i + 1) + ": " + players.get(attackPlayer).getName());
-            attack(attackPlayer, defendPlayer);
-
-            if (armies.get(defendPlayer).size() == 0) {
-                endBattle(attackPlayer, defendPlayer);
-                break;
+                // print turn and attacker name
+                System.out.println("Turn " + (turn + 1) + ": " + players.get(attackPlayer).getName());
+                attack(attackPlayer, defendPlayer);
+                System.out.println("------------------------");
+                if (armies.get(defendPlayer).size() == 0) {
+                    endBattle(attackPlayer, defendPlayer);
+                    break;
+                }
             }
         }
 
@@ -54,13 +61,13 @@ public class Battle {
     }
 
     public void attack(int attackPlayer, int defendPlayer, double factor) {
-        Character attacker = getFastest(armies.get(attackPlayer));
+        Character attacker = getAttacker(armies.get(attackPlayer));
 
         if (attacker instanceof Healer) {
 
             Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
 
-            double healHealth = roundToFirstDecimal (0.1 * attacker.getAttack() * factor);
+            double healHealth = roundToFirstDecimal(0.1 * attacker.getAttack() * factor);
             toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
 
             System.out
@@ -72,7 +79,8 @@ public class Battle {
 
             Character defender = getLowestDefence(armies.get(defendPlayer));
 
-            double damage = roundToFirstDecimal((0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence())*factor);
+            double damage = roundToFirstDecimal(
+                    (0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence()) * factor);
             double battleHealth = roundToFirstDecimal(defender.getBattleHealth() - damage);
 
             if (battleHealth < 0) {
@@ -89,7 +97,6 @@ public class Battle {
                 armies.get(defendPlayer).remove(defender);
             }
         }
-        
 
         String homeground = players.get(1).getHomeground();
         if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
@@ -102,15 +109,10 @@ public class Battle {
     public void attack(int attackPlayer, int defendPlayer) {
         attack(attackPlayer, defendPlayer, 1);
     }
-    public Character getFastest(ArrayList<Character> army) {
-        Character fastest = army.get(0);
-        for (Character character : army) {
-            if (character.getBattleSpeed() > fastest.getBattleSpeed()) {
-                fastest = character;
-            }
-            // Include Priority order here
-        }
-        return fastest;
+
+    public Character getAttacker(ArrayList<Character> army) {
+        int attackerIndex = turn % 5 - (5 - army.size());
+        return army.get(attackerIndex);
     }
 
     public Character getLowestDefence(ArrayList<Character> army) {
@@ -118,6 +120,13 @@ public class Battle {
         for (Character character : army) {
             if (character.getBattleDefence() < lowestDefence.getBattleDefence()) {
                 lowestDefence = character;
+            } else if (character.getBattleDefence() == lowestDefence.getBattleDefence()) {
+                List<String> priorityOrder = List.of("Healer", "MythicalCreature", "Archer", "Knight", "Mage");
+                int index1 = priorityOrder.indexOf(character.getType());
+                int index2 = priorityOrder.indexOf(lowestDefence.getType());
+                if (index1 < index2) {
+                    lowestDefence = character;
+                }
             }
         }
         return lowestDefence;
@@ -126,11 +135,28 @@ public class Battle {
     public Character getLowestHealth(ArrayList<Character> army) {
         Character lowestHealth = army.get(0);
         for (Character character : army) {
-            if (character.getBattleHealth() < lowestHealth.getBattleHealth()) {
+            if (character.getBattleHealth() < lowestHealth.getBattleHealth() && character.getType() != "Healer") {
                 lowestHealth = character;
             }
         }
         return lowestHealth;
+    }
+
+    public void sortArmies() {
+        for (ArrayList<Character> army : armies) {
+            Collections.sort(army, Comparator
+                    .comparingDouble(Character::getBattleSpeed)
+                    .reversed()
+                    .thenComparing((character1, character2) -> {
+                        String type1 = ((Character) character1).getType();
+                        String type2 = ((Character) character2).getType();
+                        // Define priority order
+                        List<String> priorityOrder = List.of("Archer", "Knight", "MythicalCreature", "Mage", "Healer");
+                        int index1 = priorityOrder.indexOf(type1);
+                        int index2 = priorityOrder.indexOf(type2);
+                        return Integer.compare(index1, index2);
+                    }));
+        }
     }
 
     public void setHomelandStats() {
