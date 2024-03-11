@@ -3,15 +3,15 @@ public abstract class Character {
     String name;
     int price;
 
-    int attack;
-    int defence;
-    int health;
-    int speed;
+    double attack;
+    double defence;
+    double health;
+    double speed;
 
-    int battleAttack;
-    int battleDefence;
-    int battleHealth;
-    int battleSpeed;
+    double battleAttack;
+    double battleDefence;
+    double battleHealth;
+    double battleSpeed;
 
     String category;
 
@@ -44,47 +44,47 @@ public abstract class Character {
 
     public int changePrice(int change) {return this.price+=change;}
 
-    public int getAttack() {
+    public double getAttack() {
         return this.attack;
     }
 
-    public int getDefence() {
+    public double getDefence() {
         return this.defence;
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return this.health;
     }
 
-    public int getBattleAttack() {
+    public double getBattleAttack() {
         return this.battleAttack;
     }
 
-    public void setBattleAttack(int battleAttack) {
+    public void setBattleAttack(double battleAttack) {
         this.battleAttack = battleAttack;
     }
 
-    public int getBattleDefence() {
+    public double getBattleDefence() {
         return this.battleDefence;
     }
 
-    public void setBattleDefence(int battleDefence) {
+    public void setBattleDefence(double battleDefence) {
         this.battleDefence = battleDefence;
     }
 
-    public int getBattleHealth() {
+    public double getBattleHealth() {
         return this.battleHealth;
     }
 
-    public void setBattleHealth(int battleHealth) {
+    public void setBattleHealth(double battleHealth) {
         this.battleHealth = battleHealth;
     }
 
-    public int getBattleSpeed() {
+    public double getBattleSpeed() {
         return this.battleSpeed;
     }
 
-    public void setBattleSpeed(int battleSpeed) {
+    public void setBattleSpeed(double battleSpeed) {
         this.battleSpeed = battleSpeed;
     }
     
@@ -96,7 +96,7 @@ public abstract class Character {
         this.battleSpeed = this.speed;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
 
