@@ -42,7 +42,7 @@ class Player {
     public int getXP() {
         return this.XP;
     }
-    
+
     public void setXP(int XP) {
         this.XP = XP;
     }
@@ -59,7 +59,9 @@ class Player {
         this.gold = gold;
     }
 
-    public void changeGold(int change){this.gold+=change;}
+    public void changeGold(int change) {
+        this.gold += change;
+    }
 
     public Archer getArcher() {
         return this.archer;
@@ -135,6 +137,7 @@ class Player {
     public void displayInfo() {
         System.out.println("\nName: " + this.name);
         System.out.println("XP: " + this.XP);
+        System.out.println("Gold" + this.getGold());
         System.out.println("Archer: " + this.archer.getName());
         System.out.println("Knight: " + this.knight.getName());
         System.out.println("Mage: " + this.mage.getName());
@@ -155,4 +158,5 @@ class Player {
     public void addCharacter(Character character) {
         this.characters.add(character);
     }
+
 }

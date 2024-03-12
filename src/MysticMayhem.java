@@ -19,9 +19,8 @@ public class MysticMayhem {
             System.out.println("1. Create Player");
             System.out.println("2. Select Player");
             System.out.println("3. Search for Opponent");
-            System.out.println("4. Buy Equipments");
-            System.out.println("5. Current Player Info");
-            System.out.println("6. Battle Basic with WHitewolf");
+            System.out.println("4. Current Player Info");
+            System.out.println("5. Battle Basic with Whitewolf");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -37,12 +36,9 @@ public class MysticMayhem {
                     searchOpponent();
                     break;
                 case 4:
-                    buyEquipments();
-                    break;
-                case 5:
                     currentPlayerInfo();
                     break;
-                case 6:
+                case 5:
                     battleBasicWithWhitewolf();
                     break;
                 default:
@@ -250,6 +246,36 @@ public class MysticMayhem {
         int choice = scanner.nextInt();
         currentPlayer = players.get(choice - 1);
         System.out.println("Player selected: " + currentPlayer.getUsername());
+        currentPlayer.displayInfo();
+        System.out.println("1. Shop\n2. Search Opponent");
+        System.out.println("Choose options: ");
+        int option = getChoice(2);
+        switch (option) {
+            case 1:
+                System.out.println("Welcome to Shop.");
+                while (true) {
+                    System.out.println("Choose options:\n1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu");
+                    int shop_option = getChoice(3);
+                    switch (shop_option) {
+                        case 1:
+                            ShopCharacter();
+                            break;
+                        case 2:
+                            ShopEquipment();
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            System.out.println("Invalid Choice");
+                            break;
+                    }
+                    if (shop_option == 3) {
+                        break;
+                    }
+                }
+
+        }
+
     }
 
     private static void searchOpponent() {
@@ -286,7 +312,296 @@ public class MysticMayhem {
 
     }
 
-    private static void buyEquipments() {
+    public static void ShopCharacter() {
+        Shop shop1 = new Shop();
+        System.out.println("Buy Character:\n1. Archer\n2. Knight \n3. Mage \n4. Healer\n5. MythicalCreature");
+        int characterchoice = getChoice(5);
+        Character buycharacter = null;
+        switch (characterchoice) {
+            case 1:
+                System.out.println("Choose an archer:\n1. Shooter\n2. Ranger\n3. Sunfire\n4. Zing\n5. Sagittarius");
+                int archerchoice = getChoice(5);
+                switch (archerchoice) {
+                    case 1:
+                        buycharacter = new Shooter();
+                        break;
+                    case 2:
+                        buycharacter = new Ranger();
+                        break;
+                    case 3:
+                        buycharacter = new Sunfire();
+                        break;
+                    case 4:
+                        buycharacter = new Zing();
+                        break;
+                    case 5:
+                        buycharacter = new Saggitarius();
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+
+            case 2:
+
+                System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3. Swiftblade\n4. Templar\n5. Zoro");
+                int knightchoice = getChoice(5);
+                switch (knightchoice) {
+                    case 1:
+                        buycharacter = new Cavalier();
+                        break;
+                    case 2:
+                        buycharacter = new Squire();
+                        break;
+                    case 3:
+                        buycharacter = new Swiftblade();
+                        break;
+                    case 4:
+                        buycharacter = new Templar();
+                        break;
+                    case 5:
+                        buycharacter = new Zoro();
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+
+            case 3:
+
+                System.out
+                        .println("Choose a mage:\n1. Conjurer\n2. Eldritch\n3. Enchanter\n4. Illusionist\n5. Warlock");
+                int magechoice = getChoice(5);
+                switch (magechoice) {
+                    case 1:
+                        buycharacter = new Conjurer();
+                        break;
+                    case 2:
+                        buycharacter = new Eldritch();
+                        break;
+                    case 3:
+                        buycharacter = new Enchanter();
+                        break;
+                    case 4:
+                        buycharacter = new Illusionist();
+                        break;
+                    case 5:
+                        buycharacter = new Warlock();
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+
+            case 4:
+
+                System.out.println("Choose a healer:\n1. Alchemist\n2. Lightbringer\n3. Medic\n4. Saint\n5. Soother");
+                int healerchoice = getChoice(5);
+                switch (healerchoice) {
+                    case 1:
+                        buycharacter = new Conjurer();
+                        break;
+                    case 2:
+                        buycharacter = new Eldritch();
+                        break;
+                    case 3:
+                        buycharacter = new Enchanter();
+                        break;
+                    case 4:
+                        buycharacter = new Illusionist();
+                        break;
+                    case 5:
+                        buycharacter = new Warlock();
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+
+            case 5:
+
+                System.out.println(
+                        "Choose a mythical creature:\n1. Basilisk\n2. Dragon\n3. Hydra\n4. Pegasus\n5. Phoenix");
+                int mystcreaturechoice = getChoice(5);
+                switch (mystcreaturechoice) {
+                    case 1:
+                        buycharacter = new Conjurer();
+                        break;
+                    case 2:
+                        buycharacter = new Eldritch();
+                        break;
+                    case 3:
+                        buycharacter = new Enchanter();
+                        break;
+                    case 4:
+                        buycharacter = new Illusionist();
+                        break;
+                    case 5:
+                        buycharacter = new Warlock();
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                        break;
+                }
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+                break;
+
+        }
+        shop1.buyNewCharacter(currentPlayer, buycharacter);
+
+    }
+    // public static void ShopEquipment() {
+    // Shop shop1 = new Shop();
+    // System.out.println("Buy Character:\n1. Armour\n2. Artefact");
+    // int characterchoice = getChoice(2);
+    // Character buycharacter = null;
+    // switch (characterchoice) {
+    // case 1:
+    // System.out.println("Choose an archer:\n1. Shooter\n2. Ranger\n3. Sunfire\n4.
+    // Zing\n5. Sagittarius");
+    // int archerchoice = getChoice(playerCount);
+    // switch (archerchoice) {
+    // case 1:
+    // buycharacter = new Shooter();
+    // break;
+    // case 2:
+    // buycharacter = new Ranger();
+    // break;
+    // case 3:
+    // buycharacter = new Sunfire();
+    // break;
+    // case 4:
+    // buycharacter = new Zing();
+    // break;
+    // case 5:
+    // buycharacter = new Saggitarius();
+    // break;
+    // default:
+    // System.out.println("Invalid choice.");
+    // break;
+    // }
+
+    // case 2:
+
+    // System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3.
+    // Swiftblade\n4. Templar\n5. Zoro");
+    // int knightchoice = getChoice(playerCount);
+    // switch (knightchoice) {
+    // case 1:
+    // buycharacter = new Cavalier();
+    // break;
+    // case 2:
+    // buycharacter = new Squire();
+    // break;
+    // case 3:
+    // buycharacter = new Swiftblade();
+    // break;
+    // case 4:
+    // buycharacter = new Templar();
+    // break;
+    // case 5:
+    // buycharacter = new Zoro();
+    // break;
+    // default:
+    // System.out.println("Invalid choice.");
+    // break;
+    // }
+
+    // case 3:
+
+    // System.out
+    // .println("Choose a mage:\n1. Conjurer\n2. Eldritch\n3. Enchanter\n4.
+    // Illusionist\n5. Warlock");
+    // int magechoice = getChoice(playerCount);
+    // switch (magechoice) {
+    // case 1:
+    // buycharacter = new Conjurer();
+    // break;
+    // case 2:
+    // buycharacter = new Eldritch();
+    // break;
+    // case 3:
+    // buycharacter = new Enchanter();
+    // break;
+    // case 4:
+    // buycharacter = new Illusionist();
+    // break;
+    // case 5:
+    // buycharacter = new Warlock();
+    // break;
+    // default:
+    // System.out.println("Invalid choice.");
+    // break;
+    // }
+
+    // case 4:
+
+    // System.out.println("Choose a healer:\n1. Alchemist\n2. Lightbringer\n3.
+    // Medic\n4. Saint\n5. Soother");
+    // int healerchoice = getChoice(playerCount);
+    // switch (healerchoice) {
+    // case 1:
+    // buycharacter = new Conjurer();
+    // break;
+    // case 2:
+    // buycharacter = new Eldritch();
+    // break;
+    // case 3:
+    // buycharacter = new Enchanter();
+    // break;
+    // case 4:
+    // buycharacter = new Illusionist();
+    // break;
+    // case 5:
+    // buycharacter = new Warlock();
+    // break;
+    // default:
+    // System.out.println("Invalid choice.");
+    // break;
+    // }
+
+    // case 5:
+
+    // System.out.println(
+    // "Choose a mythical creature:\n1. Basilisk\n2. Dragon\n3. Hydra\n4.
+    // Pegasus\n5. Phoenix");
+    // int mystcreaturechoice = getChoice(playerCount);
+    // switch (mystcreaturechoice) {
+    // case 1:
+    // buycharacter = new Conjurer();
+    // break;
+    // case 2:
+    // buycharacter = new Eldritch();
+    // break;
+    // case 3:
+    // buycharacter = new Enchanter();
+    // break;
+    // case 4:
+    // buycharacter = new Illusionist();
+    // break;
+    // case 5:
+    // buycharacter = new Warlock();
+    // break;
+    // default:
+    // System.out.println("Invalid choice.");
+    // break;
+    // }
+
+    // System.out.println("Invalid choice.");
+
+    // }
+    // shop1.buyNewCharacter(currentPlayer, buycharacter);
+
+    // }
+    private static void ShopEquipment() {
+        Shop shop2 = new Shop();
         if (currentPlayer == null) {
             System.out.println("No player selected.");
             return;
@@ -344,14 +659,16 @@ public class MysticMayhem {
                 System.out.println("Invalid choice.");
         }
         if (armour != null) {
-            if (currentPlayer.getGold() >= armour.price) {
-                character.setArmour(armour);
-                currentPlayer.setGold(currentPlayer.getGold() - armour.price);
-                System.out.println("Bought " + armour.name + " for " + armour.price + " gold.");
-            } else {
-                System.out.println("Not enough gold to buy " + armour.name + ".");
-                return;
-            }
+            // if (currentPlayer.getGold() >= armour.price) {
+            // character.setArmour(armour);
+            // currentPlayer.setGold(currentPlayer.getGold() - armour.price);
+            // System.out.println("Bought " + armour.name + " for " + armour.price + "
+            // gold.");
+            // } else {
+            // System.out.println("Not enough gold to buy " + armour.name + ".");
+            // return;
+            // }
+            shop2.buyArmour(currentPlayer, character, armour);
         }
 
         // choose artefact to buy from excaliber, amulet and crystal
@@ -426,15 +743,11 @@ public class MysticMayhem {
     private static int getChoice(int choiceCount) {
         int choice = 0;
         while (true) {
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-                if (choice >= 1 && choice <= choiceCount) {
-                    break;
-                } else {
-                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
+            choice = scanner.nextInt();
+            if (choice >= 1 && choice <= choiceCount) {
+                break;
+            } else {
+                System.out.println("Invalid choice. Please enter a number between 1 and" + choiceCount);
             }
         }
         return choice;
@@ -477,4 +790,5 @@ public class MysticMayhem {
 
         currentPlayer = player4;
     }
+
 }
