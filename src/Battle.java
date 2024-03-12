@@ -12,7 +12,9 @@ public class Battle {
 
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<ArrayList<Character>> armies = new ArrayList<>();
-    int turn = 0;
+
+    int attackPlayer;
+    int defendPlayer;
 
     public Battle(Player player1, Player player2) {
         // this.player1 = player1;
@@ -37,19 +39,47 @@ public class Battle {
                 "\nBattle started between " + players.get(0).getName() + " and " + players.get(1).getName() + "\n");
 
         // loop 20 times
-        for (; turn < 10; turn++) {
-            for (int i = 0; i < 2; i++) {
-                int attackPlayer = i;
-                int defendPlayer = i == 0 ? 1 : 0;
+        for (int i = 0; i < 20; i++) {
+            attackPlayer = i % 2;
+            defendPlayer = attackPlayer == 0 ? 1 : 0;
 
-                // print turn and attacker name
-                System.out.println("Turn " + (turn + 1) + ": " + players.get(attackPlayer).getName());
-                attack(attackPlayer, defendPlayer);
-                System.out.println("------------------------");
-                if (armies.get(defendPlayer).size() == 0) {
+            // print turn and attacker name
+            System.out.println("Turn " + (i + 1) + ": " + players.get(attackPlayer).getName());
+
+            Character attacker = getAttacker(armies.get(attackPlayer));
+            Character defender;
+
+            if (attacker instanceof Healer) {
+                defender = getLowestHealth(armies.get(attackPlayer));
+                heal(attacker, defender);
+            } else {
+                defender = getLowestDefence(armies.get(defendPlayer));
+                attack(attacker, defender, 1);
+
+                if (armies.get(defendPlayer).size() < 1) {
                     endBattle(attackPlayer, defendPlayer);
                     break;
                 }
+
+                String homeground = players.get(1).getHomeground();
+                if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
+                    System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
+                    attack(attacker, defender, 0.2);
+                }
+            }
+
+            System.out.println(defender.getName() + "'s Health: " + defender.getBattleHealth());
+            System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
+            if (defender.getBattleHealth() == 0) {
+                System.out.println(defender.getName() + " died!");
+                armies.get(defendPlayer).remove(defender);
+            }
+
+            System.out.println("------------------------");
+
+            if (armies.get(defendPlayer).size() < 1) {
+                endBattle(attackPlayer, defendPlayer);
+                break;
             }
         }
 
@@ -60,54 +90,25 @@ public class Battle {
 
     }
 
-    public void attack(int attackPlayer, int defendPlayer, double factor) {
-        Character attacker = getAttacker(armies.get(attackPlayer));
+    public void attack(Character attacker, Character defender, double factor) {
+        double damage = roundToFirstDecimal(
+                (0.5 * attacker.getBattleAttack() - 0.1 * defender.getBattleDefence()) * factor);
 
-        if (attacker instanceof Healer) {
+        double battleHealth = roundToFirstDecimal(defender.getBattleHealth() - damage);
 
-            Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
-
-            double healHealth = roundToFirstDecimal(0.1 * attacker.getBattleAttack() * factor);
-            toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
-
-            System.out
-                    .println(attacker.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
-
-            System.out.println(toBeHealed.getName() + "'s Health: " + toBeHealed.getBattleHealth());
-            System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
-        } else {
-
-            Character defender = getLowestDefence(armies.get(defendPlayer));
-
-            double damage = roundToFirstDecimal(
-                    0.5 * attacker.getBattleAttack() - 0.1 * defender.getBattleDefence());
-            double battleHealth = roundToFirstDecimal(defender.getBattleHealth() - damage);
-
-            if (battleHealth < 0) {
-                battleHealth = 0;
-            }
-            defender.setBattleHealth(battleHealth);
-            System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
-
-            // print defending character's health and attacking character's health
-            System.out.println(defender.getName() + "'s Health: " + defender.getBattleHealth());
-            System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
-            if (defender.getBattleHealth() == 0) {
-                System.out.println(defender.getName() + " died!");
-                armies.get(defendPlayer).remove(defender);
-            }
+        if (battleHealth < 0) {
+            battleHealth = 0;
         }
-
-        String homeground = players.get(1).getHomeground();
-        if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
-            System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
-            attack(attackPlayer, defendPlayer, 0.2);
-        }
-
+        defender.setBattleHealth(battleHealth);
+        System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
     }
 
-    public void attack(int attackPlayer, int defendPlayer) {
-        attack(attackPlayer, defendPlayer, 1);
+    public void heal(Character healer, Character toBeHealed) {
+        double healHealth = roundToFirstDecimal(0.1 * healer.getBattleAttack());
+        toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
+
+        System.out
+                .println(healer.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
     }
 
     public Character getAttacker(ArrayList<Character> army) {
@@ -224,6 +225,12 @@ public class Battle {
                 character.resetBattleStats();
             }
         }
+    }
+
+    public void printCharacter(Character character) {
+        System.out.println(
+                character.getName() + ": A: " + character.getBattleAttack() + " D: " + character.getBattleDefence()
+                        + " S: " + character.getBattleSpeed() + " H: " + character.getBattleHealth());
     }
 
     public void endBattle(int winner, int loser) {

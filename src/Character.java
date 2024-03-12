@@ -121,6 +121,7 @@ public abstract class Character {
         this.health += armour.health;
         this.speed += armour.speed;
 
+        resetBattleStats();
         this.price += armour.price * 0.2;
     }
 
@@ -131,6 +132,7 @@ public abstract class Character {
         this.defence -= this.armour.defence;
         this.health -= this.armour.health;
         this.speed -= this.armour.speed;
+        resetBattleStats();
 
         // this.price -= this.armour.price * 0.2;
         this.armour = null;
@@ -148,6 +150,7 @@ public abstract class Character {
         this.health += artefact.health;
         this.speed += artefact.speed;
 
+        resetBattleStats();
         this.price += artefact.price * 0.2;
     }
 
@@ -160,6 +163,7 @@ public abstract class Character {
         this.health -= this.artefact.health;
         this.speed -= this.artefact.speed;
 
+        resetBattleStats();
         this.price -= this.artefact.price * 0.2;
         this.artefact = null;
     }

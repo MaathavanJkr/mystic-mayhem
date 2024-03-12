@@ -463,12 +463,12 @@ public class MysticMayhem {
         player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
 
         Player basicPlayer = new Player("Basic", "basic", playerCount++);
-        player1.setHomeground("Hillcrest");
+        basicPlayer.setHomeground("Hillcrest");
         players.add(basicPlayer);
         basicPlayer.createArmy(new Shooter(), new Squire(), new Warlock(), new Soother(), new Dragon());
 
         Player whitewolf = new Player("GeraltofRivia", "whitewolf", playerCount++);
-        player4.setGold(10000);
+        whitewolf.setGold(10000);
         whitewolf.setHomeground("Marshland");
         players.add(whitewolf);
         whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
