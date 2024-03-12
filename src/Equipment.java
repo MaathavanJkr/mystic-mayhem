@@ -54,19 +54,19 @@ class Armour extends Equipment {
 
 class Chainmail extends Armour {
     Chainmail() {
-        super("Chainmail", 100, 0, 5, 10, 0);
+        super("Chainmail", 70, 0, 1, 0, -1);
     }
 }
 
 class Regalia extends Armour {
     Regalia() {
-        super("Regalia", 200, 0, 10, 20, 0);
+        super("Regalia", 105, 0, 1, 0, 0);
     }
 }
 
 class Fleece extends Armour {
     Fleece() {
-        super("Fleece", 300, 0, 15, 30, 0);
+        super("Fleece", 150, 0, 2, 1, -1);
     }
 }
 
@@ -78,18 +78,18 @@ class Artefact extends Equipment {
 
 class Excaliber extends Artefact {
     Excaliber() {
-        super("Excaliber", 500, 20, 0, 0, 0);
+        super("Excaliber", 150, 2, 0, 0, 0);
     }
 }
 
 class Amulet extends Artefact {
     Amulet() {
-        super("Amulet", 300, 0, 0, 0, 10);
+        super("Amulet", 200, 1, -1, 1, 1);
     }
 }
 
 class Crystal extends Artefact {
     Crystal() {
-        super("Crystal", 400, 0, 0, 0, 20);
+        super("Crystal", 210, 2, 1, -1, -1);
     }
 }

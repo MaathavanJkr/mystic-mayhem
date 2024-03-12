@@ -67,7 +67,7 @@ public class Battle {
 
             Character toBeHealed = getLowestHealth(armies.get(attackPlayer));
 
-            double healHealth = roundToFirstDecimal(0.1 * attacker.getAttack() * factor);
+            double healHealth = roundToFirstDecimal(0.1 * attacker.getBattleAttack() * factor);
             toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
 
             System.out
@@ -80,7 +80,7 @@ public class Battle {
             Character defender = getLowestDefence(armies.get(defendPlayer));
 
             double damage = roundToFirstDecimal(
-                    (0.5 * attacker.getAttack() - 0.1 * defender.getBattleDefence()) * factor);
+                    0.5 * attacker.getBattleAttack() - 0.1 * defender.getBattleDefence());
             double battleHealth = roundToFirstDecimal(defender.getBattleHealth() - damage);
 
             if (battleHealth < 0) {
@@ -111,8 +111,9 @@ public class Battle {
     }
 
     public Character getAttacker(ArrayList<Character> army) {
-        int attackerIndex = turn % 5 - (5 - army.size());
-        return army.get(attackerIndex);
+        Character attacker = army.remove(0);
+        army.add(attacker);
+        return attacker;
     }
 
     public Character getLowestDefence(ArrayList<Character> army) {
