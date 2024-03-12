@@ -14,7 +14,7 @@ public class Shop {
 
         if (buyingCharacter instanceof Archer){
             int income = (int) ((int) buyer.getArcher().getPrice() * 0.90);
-            int expense = buyingCharacter.getPrice();
+              int expense = buyingCharacter.getPrice();
 
             buyer.changeGold(income - expense);
 
@@ -58,4 +58,6 @@ public class Shop {
         player.changeGold(artefact.getPrice());
         character.setArtefact(artefact);
     }
+
+
 }
