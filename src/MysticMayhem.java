@@ -18,9 +18,7 @@ public class MysticMayhem {
             System.out.println("\nMain Menu:");
             System.out.println("1. Create Player");
             System.out.println("2. Select Player");
-            System.out.println("3. Search for Opponent");
-            System.out.println("4. Current Player Info");
-            System.out.println("5. Battle Basic with Whitewolf");
+            System.out.println("3. Battle Basic with Whitewolf");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -33,12 +31,6 @@ public class MysticMayhem {
                     selectPlayer();
                     break;
                 case 3:
-                    searchOpponent();
-                    break;
-                case 4:
-                    currentPlayerInfo();
-                    break;
-                case 5:
                     battleBasicWithWhitewolf();
                     break;
                 default:
@@ -247,32 +239,55 @@ public class MysticMayhem {
         currentPlayer = players.get(choice - 1);
         System.out.println("Player selected: " + currentPlayer.getUsername());
         currentPlayer.displayInfo();
-        System.out.println("1. Shop\n2. Search Opponent");
-        System.out.println("Choose options: ");
-        int option = getChoice(2);
-        switch (option) {
-            case 1:
-                System.out.println("Welcome to Shop.");
-                while (true) {
-                    System.out.println("Choose options:\n1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu");
-                    int shop_option = getChoice(3);
-                    switch (shop_option) {
-                        case 1:
-                            ShopCharacter();
+        while (true) {
+            System.out.println("1. Shop\n2. Search Opponent\n3. Current Player Info\n4. Exit to Main Menu");
+            System.out.println("Choose options: ");
+            int option = getChoice(4);
+            switch (option) {
+                case 1:
+                    System.out.println("Welcome to Shop.");
+                    while (true) {
+                        System.out
+                                .println("Choose options:\n1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu");
+                        int shop_option = getChoice(3);
+                        switch (shop_option) {
+                            case 1:
+                                ShopCharacter();
+                                break;
+                            case 2:
+                                ShopEquipment();
+                                break;
+                            case 3:
+                                break;
+                            default:
+                                System.out.println("Invalid Choice");
+                                break;
+                        }
+                        if (shop_option == 3) {
                             break;
-                        case 2:
-                            ShopEquipment();
-                            break;
-                        case 3:
-                            break;
-                        default:
-                            System.out.println("Invalid Choice");
-                            break;
+                        }
                     }
-                    if (shop_option == 3) {
-                        break;
-                    }
-                }
+
+                case 2:
+                    searchOpponent();
+                    break;
+
+                case 3:
+                    currentPlayerInfo();
+                    break;
+
+                case 4:
+                    break;
+
+                default:
+                    System.out.println("Inavlid Choice");
+                    break;
+
+            }
+
+            if (option == 4) {
+                break;
+            }
 
         }
 
