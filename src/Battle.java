@@ -51,35 +51,47 @@ public class Battle {
 
             if (attacker instanceof Healer) {
                 defender = getLowestHealth(armies.get(attackPlayer));
-                heal(attacker, defender);
+                heal(attacker, defender, 1);
             } else {
                 defender = getLowestDefence(armies.get(defendPlayer));
                 attack(attacker, defender, 1);
+            }
 
-                if (armies.get(defendPlayer).size() < 1) {
-                    endBattle(attackPlayer, defendPlayer);
-                    break;
-                }
+            String homeground = players.get(1).getHomeground();
 
-                String homeground = players.get(1).getHomeground();
-                if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
-                    System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
-                    attack(attacker, defender, 0.2);
-                }
+            if (homeground == "Arcane" && attacker.getCategory() == "Mystics") {
+                attacker.setBattleHealth(roundToFirstDecimal(attacker.getBattleHealth() * 1.1));
             }
 
             System.out.println(defender.getName() + "'s Health: " + defender.getBattleHealth());
             System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
+
             if (defender.getBattleHealth() == 0) {
                 System.out.println(defender.getName() + " died!");
                 armies.get(defendPlayer).remove(defender);
+                if (armies.get(defendPlayer).size() < 1) {
+                    endBattle(attackPlayer, defendPlayer);
+                    break;
+                }
             }
 
             System.out.println("------------------------");
 
-            if (armies.get(defendPlayer).size() < 1) {
-                endBattle(attackPlayer, defendPlayer);
-                break;
+            if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
+                System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
+                defender = getLowestHealth(armies.get(attackPlayer));
+                if (attacker instanceof Healer) {
+                    defender = getLowestHealth(armies.get(attackPlayer));
+                    heal(attacker, defender, 0.2);
+                } else {
+                    defender = getLowestDefence(armies.get(defendPlayer));
+                    attack(attacker, defender, 0.2);
+                }
+
+                System.out.println(defender.getName() + "'s Health: " + defender.getBattleHealth());
+                System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
+
+                System.out.println("------------------------");
             }
         }
 
@@ -87,6 +99,8 @@ public class Battle {
         if (armies.get(0).size() != 0 && armies.get(1).size() != 0) {
             System.out.println("Draw!");
         }
+
+        printStats();
 
     }
 
@@ -103,8 +117,8 @@ public class Battle {
         System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
     }
 
-    public void heal(Character healer, Character toBeHealed) {
-        double healHealth = roundToFirstDecimal(0.1 * healer.getBattleAttack());
+    public void heal(Character healer, Character toBeHealed, double factor) {
+        double healHealth = roundToFirstDecimal(0.1 * healer.getBattleAttack() * factor);
         toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
 
         System.out
@@ -204,7 +218,6 @@ public class Battle {
                         switch (character.getCategory()) {
                             case "Mystics":
                                 character.setBattleAttack(character.getBattleAttack() + 2);
-                                character.setBattleHealth((int) (character.getBattleHealth() * 1.1));
                                 break;
                             case "Marshlanders":
                             case "Highlanders":
@@ -233,10 +246,22 @@ public class Battle {
                         + " S: " + character.getBattleSpeed() + " H: " + character.getBattleHealth());
     }
 
-    public void endBattle(int winner, int loser) {
-        System.out.println(players.get(winner).getName() + " won!");
+    public void printStats() {
+        for (Player player : players) {
+            System.out.println(player.getName() + " XP: " + player.getXP() + " gold coins: " + player.getGold());
+        }
+    }
 
-        players.get(winner).addXP();
+    public void endBattle(int winnerIndex, int loserIndex) {
+        Player winner = players.get(winnerIndex);
+        Player loser = players.get(loserIndex);
+
+        System.out.println(winner.getName() + " won!");
+
+        winner.addXP();
+        int gold = (int) Math.round(loser.getGold() * 0.1);
+        winner.setGold(winner.getGold() + gold);
+        loser.setGold(loser.getGold() - gold);
         resetAllBattleStats();
     }
 
