@@ -30,7 +30,7 @@ public class Battle {
         armies.add(player2.getArmy());
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
 
         setHomelandStats();
         sortArmies();
@@ -92,7 +92,9 @@ public class Battle {
                 System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
 
                 System.out.println("------------------------");
+
             }
+            Thread.sleep(1000);
         }
 
         // if no one wins, print draw
@@ -101,6 +103,8 @@ public class Battle {
         }
 
         printStats();
+
+
 
     }
 

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MysticMayhem {
@@ -9,16 +10,18 @@ public class MysticMayhem {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public void startGame() {
+    public void startGame() throws InterruptedException {
         System.out.println("Welcome to Mystic Mayhem Game!");
 
         addDemoData();
 
         while (true) {
+            System.out.println("\n");
             System.out.println("\nMain Menu:");
             System.out.println("1. Create Player");
             System.out.println("2. Select Player");
             System.out.println("3. Battle Basic with Whitewolf");
+            System.out.println("\n");
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -230,25 +233,28 @@ public class MysticMayhem {
         }
     }
 
-    private static void selectPlayer() {
+    private static void selectPlayer() throws InterruptedException {
+        System.out.println("\n");
         for (int i = 0; i < players.size(); i++) {
             System.out.println((i + 1) + ". " + players.get(i).getUsername());
+            Thread.sleep(500);
         }
-        System.out.print("Choose a player: ");
+        System.out.println("\n");
+        System.out.print("Choose a player: \n");
         int choice = scanner.nextInt();
         currentPlayer = players.get(choice - 1);
         System.out.println("Player selected: " + currentPlayer.getUsername());
         currentPlayer.displayInfo();
         while (true) {
-            System.out.println("1. Shop\n2. Search Opponent\n3. Current Player Info\n4. Exit to Main Menu");
-            System.out.println("Choose options: ");
+            System.out.println("1. Shop\n2. Search Opponent\n3. Current Player Info\n4. Exit to Main Menu\n");
+            System.out.println("Choose options: \n");
             int option = getChoice(4);
             switch (option) {
                 case 1:
-                    System.out.println("Welcome to Shop.");
+                    System.out.println("Welcome to Shop.\n");
                     while (true) {
                         System.out
-                                .println("Choose options:\n1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu");
+                                .println("Choose options:\n1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu\n");
                         int shop_option = getChoice(3);
                         switch (shop_option) {
                             case 1:
@@ -260,7 +266,7 @@ public class MysticMayhem {
                             case 3:
                                 break;
                             default:
-                                System.out.println("Invalid Choice");
+                                System.out.println("Invalid Choice\n");
                                 break;
                         }
                         if (shop_option == 3) {
@@ -280,7 +286,7 @@ public class MysticMayhem {
                     break;
 
                 default:
-                    System.out.println("Inavlid Choice");
+                    System.out.println("Invalid Choice\n");
                     break;
 
             }
@@ -293,20 +299,20 @@ public class MysticMayhem {
 
     }
 
-    private static void searchOpponent() {
+    private static void searchOpponent() throws InterruptedException {
         if (currentPlayer == null) {
-            System.out.println("No player selected.");
+            System.out.println("No player selected.\n");
             return;
         }
-        System.out.println("Current Player: " + currentPlayer.getName());
+        System.out.println("Current Player: " + currentPlayer.getName()+"\n");
         ArrayList<Player> opponents = players;
         opponents.remove(currentPlayer);
         Collections.shuffle(opponents);
 
-        System.out.println("Searching for opponent...");
+        System.out.println("Searching for opponent...\n");
 
         if (opponents.size() <= 0) {
-            System.out.println("No opponent found.");
+            System.out.println("No opponent found.\n");
             return;
         }
 
@@ -722,23 +728,32 @@ public class MysticMayhem {
         }
     }
 
-    private static void currentPlayerInfo() {
+    private static void currentPlayerInfo() throws InterruptedException {
         if (currentPlayer == null) {
             System.out.println("No player selected.");
             return;
         }
-        System.out.println("\nCurrent Player: " + currentPlayer.getName());
-        System.out.println("Gold: " + currentPlayer.getGold());
-        System.out.println("XP: " + currentPlayer.getXP());
-        System.out.println("Archer: " + currentPlayer.getArcher().getCharacterInfo());
-        System.out.println("Knight: " + currentPlayer.getKnight().getCharacterInfo());
-        System.out.println("Mage: " + currentPlayer.getMage().getCharacterInfo());
-        System.out.println("Healer: " + currentPlayer.getHealer().getCharacterInfo());
-        System.out.println("Mythical Creature: " + currentPlayer.getMythicalCreature().getCharacterInfo());
-        System.out.println("Homeground: " + currentPlayer.getHomeground());
+
+        Object[] info = {
+                "\nCurrent Player: " + currentPlayer.getName(),
+                "Gold: " + currentPlayer.getGold(),
+                "XP: " + currentPlayer.getXP(),
+                "Archer: " + currentPlayer.getArcher().getCharacterInfo(),
+                "Knight: " + currentPlayer.getKnight().getCharacterInfo(),
+                "Mage: " + currentPlayer.getMage().getCharacterInfo(),
+                "Healer: " + currentPlayer.getHealer().getCharacterInfo(),
+                "Mythical Creature: " + currentPlayer.getMythicalCreature().getCharacterInfo(),
+                "Homeground: " + currentPlayer.getHomeground()
+        };
+
+        for (Object informations :info){
+            System.out.println(informations);
+            Thread.sleep(500);
+        }
+        System.out.println("\n");
     }
 
-    private static void battleBasicWithWhitewolf() {
+    private static void battleBasicWithWhitewolf() throws InterruptedException {
         Player basicPlayer = players.get(4);
         Player whitewolf = players.get(5);
         Battle battle = new Battle(basicPlayer, whitewolf);

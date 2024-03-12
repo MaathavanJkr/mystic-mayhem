@@ -134,15 +134,24 @@ class Player {
         buyCharacter(mythicalCreature);
     }
 
-    public void displayInfo() {
-        System.out.println("\nName: " + this.name);
-        System.out.println("XP: " + this.XP);
-        System.out.println("Gold" + this.getGold());
-        System.out.println("Archer: " + this.archer.getName());
-        System.out.println("Knight: " + this.knight.getName());
-        System.out.println("Mage: " + this.mage.getName());
-        System.out.println("Healer: " + this.healer.getName());
-        System.out.println("Mythical Creature: " + this.mythicalCreature.getName());
+    public void displayInfo() throws InterruptedException {
+        Object[] info = {
+                "\nName: " + this.name,
+                "XP: " + this.XP,
+                "Gold: " + this.getGold(),
+                "Archer: " + this.archer.getName(),
+                "Knight: " + this.knight.getName(),
+                "Mage: " + this.mage.getName(),
+                "Healer: " + this.healer.getName(),
+                "Mythical Creature: " + this.mythicalCreature.getName()
+        };
+
+        for (Object informations :info){
+            System.out.println(informations);
+            Thread.sleep(500);
+        }
+        System.out.println("\n");
+
     }
 
     public ArrayList<Character> getArmy() {
