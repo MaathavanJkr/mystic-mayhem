@@ -1,6 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Scanner;
 
 import javax.print.DocFlavor.STRING;
@@ -322,6 +322,34 @@ public class MysticMayhem {
         }
     }
 
+    public static Character chooseCharacter(ArrayList<Character> characters) {
+        String characterType = characters.get(0).getType();
+        Introstring("SELECT " + characterType.toUpperCase());
+        System.out.printf("+----=+--------------+---------------+-----------+-------------+-----------+---------+\n");
+        System.out.printf("+-----| %s      |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n",
+                characterType);
+        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
+        for (int i = 0; i < characters.size(); i++) {
+            Character character = characters.get(i);
+            System.out.printf("| %2d  |%-12s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n",
+                    i + 1,
+                    character.getName(),
+                    character.getPrice(),
+                    (int) character.getAttack(), // Assuming getAttack() returns a double, cast to int
+                    (int) character.getDefence(), // Assuming getDefence() returns a double, cast to int
+                    (int) character.getHealth(), // Assuming getHealth() returns a double, cast to int
+                    (int) character.getSpeed() // Assuming getSpeed() returns a double, cast to int
+            );
+        }
+        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
+
+        System.out.printf("Choose an " + characterType + ":");
+
+        int choice = getChoice(characters.size());
+
+        return characters.get(choice - 1);
+    }
+
     public void startGame() throws InterruptedException {
         delay();
         Introstring("WELCOME TO MYSTIC MAYHEM");
@@ -362,7 +390,8 @@ public class MysticMayhem {
         Player player = new Player(name, username, playerCount++);
         players.add(player);
         Introstring("PLAYER CREATED SUCCESSFULLY");
-        clear();
+        delay(1000);
+        space();
         // choose homeground
         System.out.println();
         Introstring("HOME GROUND");
@@ -372,194 +401,71 @@ public class MysticMayhem {
         int homegroundChoice = getChoice(4);
         switch (homegroundChoice) {
             case 1:
-                player.setHomeground("Hillcrest");
+                player.setHomeground(new Hillcrest());
                 break;
             case 2:
-                player.setHomeground("Marshland");
+                player.setHomeground(new Marshland());
                 break;
             case 3:
-                player.setHomeground("Desert");
+                player.setHomeground(new Desert());
                 break;
             case 4:
-                player.setHomeground("Arcane");
+                player.setHomeground(new Arcane());
                 break;
         }
 
         space();
 
         while (true) {
+
             // Choose an Archer, diplay archers with their price
-            // System.out.println("Choose an archer:");
-
-            ArcherTable();
             System.out.println();
-            System.out.printf("Choose an Archer(1/2/3/4/5):");
 
-            int archerChoice = getChoice(5);
-            Archer archer = null;
-            switch (archerChoice) {
+            ArrayList<Character> archers = new ArrayList<Character>(
+                    Arrays.asList(new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius()));
 
-                case 1:
-                    System.out.println("You chose Shooter.");
-                    archer = new Shooter();
-                    break;
-                case 2:
-                    System.out.println("You chose Ranger.");
-                    archer = new Ranger();
-                    break;
-                case 3:
-                    System.out.println("You chose Sunfire.");
-                    archer = new Sunfire();
-                    break;
-                case 4:
-                    System.out.println("You chose Zing.");
-                    archer = new Zing();
-                    break;
-                case 5:
-                    System.out.println("You chose Sagittarius.");
-                    archer = new Saggitarius();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+            Archer archer = (Archer) chooseCharacter(archers);
 
             space();
 
             // Choose a Knight
-            // System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3.
-            // Swiftblade\n4. Templar\n5. Zoro");
             System.out.println();
-            KnightTable();
-            System.out.println();
-            System.out.printf("Choose a Knight(1/2/3/4/5):");
-            int knightChoice = getChoice(5);
-            Knight knight = null;
-            switch (knightChoice) {
-                case 2:
-                    System.out.println("You chose Cavalier.");
-                    knight = new Cavalier();
-                    break;
-                case 1:
-                    System.out.println("You chose Squire.");
-                    knight = new Squire();
-                    break;
-                case 5:
-                    System.out.println("You chose Swiftblade.");
-                    knight = new Swiftblade();
-                    break;
-                case 3:
-                    System.out.println("You chose Templar.");
-                    knight = new Templar();
-                    break;
-                case 4:
-                    System.out.println("You chose Zoro.");
-                    knight = new Zoro();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> knights = new ArrayList<Character>(
+                    Arrays.asList(new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade()));
+
+            Knight knight = (Knight) chooseCharacter(knights);
 
             space();
 
-            // Choose a
+            // Choose a Mage
             System.out.println();
-            MageTable();
-            System.out.println();
-            System.out.printf("Choose a Mage(1/2/3/4/5):");
-            int mageChoice = getChoice(5);
-            Mage mage = null;
-            switch (mageChoice) {
-                case 4:
-                    System.out.println("You chose Conjurer.");
-                    mage = new Conjurer();
-                    break;
-                case 3:
-                    System.out.println("You chose Eldritch.");
-                    mage = new Eldritch();
-                    break;
-                case 5:
-                    System.out.println("You chose Enchanter.");
-                    mage = new Enchanter();
-                    break;
-                case 2:
-                    System.out.println("You chose Illusionist.");
-                    mage = new Illusionist();
-                    break;
-                case 1:
-                    System.out.println("You chose Warlock.");
-                    mage = new Warlock();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> mages = new ArrayList<Character>(
+                    Arrays.asList(new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch()));
+
+            Mage mage = (Mage) chooseCharacter(mages);
 
             space();
 
             // Choose a Healer
             System.out.println();
-            HealersTable();
-            System.out.println();
-            System.out.printf("Choose a Healer(1/2/3/4/5):");
-            int healerChoice = getChoice(5);
-            Healer healer = null;
-            switch (healerChoice) {
-                case 3:
-                    System.out.println("You chose Alchemist.");
-                    healer = new Alchemist();
-                    break;
-                case 5:
-                    System.out.println("You chose Lightbringer.");
-                    healer = new Lightbringer();
-                    break;
-                case 2:
-                    System.out.println("You chose Medic.");
-                    healer = new Medic();
-                    break;
-                case 4:
-                    System.out.println("You chose Saint.");
-                    healer = new Saint();
-                    break;
-                case 1:
-                    System.out.println("You chose Soother.");
-                    healer = new Soother();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> healers = new ArrayList<Character>(
+                    Arrays.asList(new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer()));
+
+            Healer healer = (Healer) chooseCharacter(healers);
 
             space();
 
             // Choose a Mythical Creature
             System.out.println();
-            MythicalCreatureTable();
-            System.out.println();
-            System.out.printf("Choose a Mythical Creature(1/2/3/4/5):");
-            int creatureChoice = getChoice(5);
-            MythicalCreature creature = null;
-            switch (creatureChoice) {
-                case 2:
-                    System.out.println("You chose Basilisk.");
-                    creature = new Basilisk();
-                    break;
-                case 1:
-                    System.out.println("You chose Dragon.");
-                    creature = new Dragon();
-                    break;
-                case 3:
-                    System.out.println("You chose Hydra.");
-                    creature = new Hydra();
-                    break;
-                case 5:
-                    System.out.println("You chose Pegasus.");
-                    creature = new Pegasus();
-                    break;
-                case 4:
-                    System.out.println("You chose Phoenix.");
-                    creature = new Phoenix();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> creatures = new ArrayList<Character>(
+                    Arrays.asList(new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus()));
+
+            MythicalCreature creature = (MythicalCreature) chooseCharacter(creatures);
+
             space();
 
             if (archer.price + knight.price + mage.price + healer.price + creature.price <= 500) {
@@ -1192,33 +1098,33 @@ public class MysticMayhem {
     private static void addDemoData() {
         Player player1 = new Player("Umen", "umen", playerCount++);
         player1.setGold(10000);
-        player1.setHomeground("Hillcrest");
+        player1.setHomeground(new Hillcrest());
         players.add(player1);
         player1.createArmy(new Shooter(), new Cavalier(), new Conjurer(), new Alchemist(), new Basilisk());
         Player player2 = new Player("Ilampoornan", "ilam", playerCount++);
         player2.setGold(10000);
-        player2.setHomeground("Marshland");
+        player2.setHomeground(new Marshland());
         players.add(player2);
         player2.createArmy(new Ranger(), new Squire(), new Eldritch(), new Lightbringer(), new Dragon());
         Player player3 = new Player("Varun", "varun", playerCount++);
         player3.setGold(10000);
-        player3.setHomeground("Desert");
+        player3.setHomeground(new Desert());
         players.add(player3);
         player3.createArmy(new Sunfire(), new Swiftblade(), new Enchanter(), new Medic(), new Hydra());
         Player player4 = new Player("Maathavan", "maathavan", playerCount++);
         player4.setGold(10000);
-        player4.setHomeground("Hillcrest");
+        player4.setHomeground(new Arcane());
         players.add(player4);
         player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
 
         Player basicPlayer = new Player("Basic", "basic", playerCount++);
-        basicPlayer.setHomeground("Hillcrest");
+        basicPlayer.setHomeground(new Hillcrest());
         players.add(basicPlayer);
         basicPlayer.createArmy(new Shooter(), new Squire(), new Warlock(), new Soother(), new Dragon());
 
         Player whitewolf = new Player("GeraltofRivia", "whitewolf", playerCount++);
         whitewolf.setGold(10000);
-        whitewolf.setHomeground("Marshland");
+        whitewolf.setHomeground(new Marshland());
         players.add(whitewolf);
         whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
         whitewolf.getArcher().setArmour(new Chainmail());
