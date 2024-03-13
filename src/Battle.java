@@ -57,7 +57,7 @@ public class Battle {
                 attack(attacker, defender, 1);
             }
 
-            String homeground = players.get(1).getHomeground().getName();
+            String homeground = players.get(1).getHomeground();
 
             if (homeground == "Arcane" && attacker.getCategory() == "Mystics") {
                 attacker.setBattleHealth(roundToFirstDecimal(attacker.getBattleHealth() * 1.1));
@@ -180,7 +180,7 @@ public class Battle {
     }
 
     public void setHomelandStats() {
-        String homeground = players.get(1).getHomeground().getName();
+        String homeground = players.get(1).getHomeground();
         for (ArrayList<Character> army : armies) {
             for (Character character : army) {
                 switch (homeground) {
