@@ -364,7 +364,7 @@ public class MysticMayhem {
             System.out.println();
 
             ArrayList<Character> mages = new ArrayList<Character>(
-                    Arrays.asList(new Conjurer(), new Eldritch(), new Enchanter(), new Illusionist(), new Warlock()));
+                    Arrays.asList(new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch()));
 
             Mage mage = (Mage) chooseCharacter(mages);
 
