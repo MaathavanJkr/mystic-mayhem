@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -362,7 +363,7 @@ public class MysticMayhem {
         MainMenu();
     }
 
-    private static void createPlayer() {
+    private static void createPlayer() throws InterruptedException {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
         while (name.length() == 0) {
@@ -414,184 +415,64 @@ public class MysticMayhem {
         }
 
         space();
-
         while (true) {
+
             // Choose an Archer, diplay archers with their price
-            // System.out.println("Choose an archer:");
-
-            ArcherTable();
             System.out.println();
-            System.out.printf("Choose an Archer(1/2/3/4/5):");
 
-            int archerChoice = getChoice(5);
-            Archer archer = null;
-            switch (archerChoice) {
+            ArrayList<Character> archers = new ArrayList<Character>(
+                    Arrays.asList(new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius()));
 
-                case 1:
-                    System.out.println("You chose Shooter.");
-                    archer = new Shooter();
-                    break;
-                case 2:
-                    System.out.println("You chose Ranger.");
-                    archer = new Ranger();
-                    break;
-                case 3:
-                    System.out.println("You chose Sunfire.");
-                    archer = new Sunfire();
-                    break;
-                case 4:
-                    System.out.println("You chose Zing.");
-                    archer = new Zing();
-                    break;
-                case 5:
-                    System.out.println("You chose Sagittarius.");
-                    archer = new Saggitarius();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+            Archer archer = (Archer) chooseCharacter(archers);
 
             space();
 
             // Choose a Knight
-            // System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3.
-            // Swiftblade\n4. Templar\n5. Zoro");
             System.out.println();
-            KnightTable();
-            System.out.println();
-            System.out.printf("Choose a Knight(1/2/3/4/5):");
-            int knightChoice = getChoice(5);
-            Knight knight = null;
-            switch (knightChoice) {
-                case 2:
-                    System.out.println("You chose Cavalier.");
-                    knight = new Cavalier();
-                    break;
-                case 1:
-                    System.out.println("You chose Squire.");
-                    knight = new Squire();
-                    break;
-                case 5:
-                    System.out.println("You chose Swiftblade.");
-                    knight = new Swiftblade();
-                    break;
-                case 3:
-                    System.out.println("You chose Templar.");
-                    knight = new Templar();
-                    break;
-                case 4:
-                    System.out.println("You chose Zoro.");
-                    knight = new Zoro();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> knights = new ArrayList<Character>(
+                    Arrays.asList(new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade()));
+
+            Knight knight = (Knight) chooseCharacter(knights);
 
             space();
 
-            // Choose a
+            // Choose a Mage 
             System.out.println();
-            MageTable();
-            System.out.println();
-            System.out.printf("Choose a Mage(1/2/3/4/5):");
-            int mageChoice = getChoice(5);
-            Mage mage = null;
-            switch (mageChoice) {
-                case 4:
-                    System.out.println("You chose Conjurer.");
-                    mage = new Conjurer();
-                    break;
-                case 3:
-                    System.out.println("You chose Eldritch.");
-                    mage = new Eldritch();
-                    break;
-                case 5:
-                    System.out.println("You chose Enchanter.");
-                    mage = new Enchanter();
-                    break;
-                case 2:
-                    System.out.println("You chose Illusionist.");
-                    mage = new Illusionist();
-                    break;
-                case 1:
-                    System.out.println("You chose Warlock.");
-                    mage = new Warlock();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+
+            ArrayList<Character> mages = new ArrayList<Character>(
+                    Arrays.asList(new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch()));
+
+            Mage mage = (Mage) chooseCharacter(mages);
 
             space();
 
             // Choose a Healer
             System.out.println();
-            HealersTable();
-            System.out.println();
-            System.out.printf("Choose a Healer(1/2/3/4/5):");
-            int healerChoice = getChoice(5);
-            Healer healer = null;
-            switch (healerChoice) {
-                case 3:
-                    System.out.println("You chose Alchemist.");
-                    healer = new Alchemist();
-                    break;
-                case 5:
-                    System.out.println("You chose Lightbringer.");
-                    healer = new Lightbringer();
-                    break;
-                case 2:
-                    System.out.println("You chose Medic.");
-                    healer = new Medic();
-                    break;
-                case 4:
-                    System.out.println("You chose Saint.");
-                    healer = new Saint();
-                    break;
-                case 1:
-                    System.out.println("You chose Soother.");
-                    healer = new Soother();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+            
+            ArrayList<Character> healers = new ArrayList<Character>(
+                    Arrays.asList(new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer()));
+
+            Healer healer = (Healer) chooseCharacter(healers);
 
             space();
 
             // Choose a Mythical Creature
             System.out.println();
-            MythicalCreatureTable();
-            System.out.println();
-            System.out.printf("Choose a Mythical Creature(1/2/3/4/5):");
-            int creatureChoice = getChoice(5);
-            MythicalCreature creature = null;
-            switch (creatureChoice) {
-                case 2:
-                    System.out.println("You chose Basilisk.");
-                    creature = new Basilisk();
-                    break;
-                case 1:
-                    System.out.println("You chose Dragon.");
-                    creature = new Dragon();
-                    break;
-                case 3:
-                    System.out.println("You chose Hydra.");
-                    creature = new Hydra();
-                    break;
-                case 5:
-                    System.out.println("You chose Pegasus.");
-                    creature = new Pegasus();
-                    break;
-                case 4:
-                    System.out.println("You chose Phoenix.");
-                    creature = new Phoenix();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
+            
+            ArrayList<Character> creatures = new ArrayList<Character>(
+                    Arrays.asList(new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus()));
+
+            MythicalCreature creature = (MythicalCreature) chooseCharacter(creatures);
+            
             space();
 
             if (archer.price + knight.price + mage.price + healer.price + creature.price <= 500) {
                 player.createArmy(archer, knight, mage, healer, creature);
+                space();
+                Introstring("PLAYER INFO");
+                currentPlayer = player;
+                currentPlayer.displayInfo();
                 break;
             } else {
                 System.out.println("Total price exceeds 500 gold. Please choose again.");
@@ -899,149 +780,7 @@ public class MysticMayhem {
         }
 
     }
-    // public static void ShopEquipment() {
-    // Shop shop1 = new Shop();
-    // System.out.println("Buy Character:\n1. Armour\n2. Artefact");
-    // int characterchoice = getChoice(2);
-    // Character buycharacter = null;
-    // switch (characterchoice) {
-    // case 1:
-    // System.out.println("Choose an archer:\n1. Shooter\n2. Ranger\n3. Sunfire\n4.
-    // Zing\n5. Sagittarius");
-    // int archerchoice = getChoice(playerCount);
-    // switch (archerchoice) {
-    // case 1:
-    // buycharacter = new Shooter();
-    // break;
-    // case 2:
-    // buycharacter = new Ranger();
-    // break;
-    // case 3:
-    // buycharacter = new Sunfire();
-    // break;
-    // case 4:
-    // buycharacter = new Zing();
-    // break;
-    // case 5:
-    // buycharacter = new Saggitarius();
-    // break;
-    // default:
-    // System.out.println("Invalid choice.");
-    // break;
-    // }
 
-    // case 2:
-
-    // System.out.println("Choose a knight:\n1. Cavalier\n2. Squire\n3.
-    // Swiftblade\n4. Templar\n5. Zoro");
-    // int knightchoice = getChoice(playerCount);
-    // switch (knightchoice) {
-    // case 1:
-    // buycharacter = new Cavalier();
-    // break;
-    // case 2:
-    // buycharacter = new Squire();
-    // break;
-    // case 3:
-    // buycharacter = new Swiftblade();
-    // break;
-    // case 4:
-    // buycharacter = new Templar();
-    // break;
-    // case 5:
-    // buycharacter = new Zoro();
-    // break;
-    // default:
-    // System.out.println("Invalid choice.");
-    // break;
-    // }
-
-    // case 3:
-
-    // System.out
-    // .println("Choose a mage:\n1. Conjurer\n2. Eldritch\n3. Enchanter\n4.
-    // Illusionist\n5. Warlock");
-    // int magechoice = getChoice(playerCount);
-    // switch (magechoice) {
-    // case 1:
-    // buycharacter = new Conjurer();
-    // break;
-    // case 2:
-    // buycharacter = new Eldritch();
-    // break;
-    // case 3:
-    // buycharacter = new Enchanter();
-    // break;
-    // case 4:
-    // buycharacter = new Illusionist();
-    // break;
-    // case 5:
-    // buycharacter = new Warlock();
-    // break;
-    // default:
-    // System.out.println("Invalid choice.");
-    // break;
-    // }
-
-    // case 4:
-
-    // System.out.println("Choose a healer:\n1. Alchemist\n2. Lightbringer\n3.
-    // Medic\n4. Saint\n5. Soother");
-    // int healerchoice = getChoice(playerCount);
-    // switch (healerchoice) {
-    // case 1:
-    // buycharacter = new Conjurer();
-    // break;
-    // case 2:
-    // buycharacter = new Eldritch();
-    // break;
-    // case 3:
-    // buycharacter = new Enchanter();
-    // break;
-    // case 4:
-    // buycharacter = new Illusionist();
-    // break;
-    // case 5:
-    // buycharacter = new Warlock();
-    // break;
-    // default:
-    // System.out.println("Invalid choice.");
-    // break;
-    // }
-
-    // case 5:
-
-    // System.out.println(
-    // "Choose a mythical creature:\n1. Basilisk\n2. Dragon\n3. Hydra\n4.
-    // Pegasus\n5. Phoenix");
-    // int mystcreaturechoice = getChoice(playerCount);
-    // switch (mystcreaturechoice) {
-    // case 1:
-    // buycharacter = new Conjurer();
-    // break;
-    // case 2:
-    // buycharacter = new Eldritch();
-    // break;
-    // case 3:
-    // buycharacter = new Enchanter();
-    // break;
-    // case 4:
-    // buycharacter = new Illusionist();
-    // break;
-    // case 5:
-    // buycharacter = new Warlock();
-    // break;
-    // default:
-    // System.out.println("Invalid choice.");
-    // break;
-    // }
-
-    // System.out.println("Invalid choice.");
-
-    // }
-    // shop1.buyNewCharacter(currentPlayer, buycharacter);
-
-    // }
     private static void ShopEquipment() {
         while (true) {
             Shop shop2 = new Shop();
