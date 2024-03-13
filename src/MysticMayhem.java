@@ -95,7 +95,6 @@ public class MysticMayhem {
     }
 
     public static void space() {
-        clear();
         System.out.println();
         for (int i = 0; i < 100; i++) {
             System.out.printf("-");
