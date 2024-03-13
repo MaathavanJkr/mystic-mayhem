@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Scanner;
 
 import javax.print.DocFlavor.STRING;
