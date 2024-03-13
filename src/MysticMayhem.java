@@ -12,23 +12,79 @@ public class MysticMayhem {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    public static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void delay() {
+        delay(200);
+    }
+
+    public static void delay(int duration) {
+        try {
+            Thread.sleep(duration);
+        } catch (InterruptedException e) {
+            System.out.println("Code Crashed");
+        }
+    }
+
+    public static void colorIT(String color, String word) {
+        String ColorCode = color;
+        String resetColorCode = "\u001B[0m";
+        System.out.println(ColorCode + word + resetColorCode);
+        delay();
+
+    }
+
     public static void drawMytic() {
-        System.out.println("#     #   #     #      ######     #########    ########       ########     ");
-        System.out.println("##   ##    #   #      #      *        #           #          #        #    ");
-        System.out.println("# # # #     # #        ######         #           #          #             ");
-        System.out.println("#  #  #      #                #       #           #          #             ");
-        System.out.println("#     #      #         *      #       #           #          #       #     ");
-        System.out.println("#     #      #          #####         #        ########       ########     ");
+
+        // ANSI escape code to reset color
+        colorIT("\u001B[35m", "#     #   #     #      ######     #########    ########       ########     ");
+        colorIT("\u001B[35m", "##   ##    #   #      #      *        #           #          #        #    ");
+        colorIT("\u001B[35m", "# # # #     # #        ######         #           #          #             ");
+        colorIT("\u001B[35m", "#     #      #         *      #       #           #          #       #     ");
+        colorIT("\u001B[35m", "#     #      #          #####         #        ########       ########     ");
         System.out.println();
     }
 
     public static void drawMayhem() {
-        System.out.println("             #     #       #        #     #     #       #    ########     #     #       ");
-        System.out.println("             ##   ##      # #        #   #      #       #    #            ##   ##       ");
-        System.out.println("             # # # #     #   #        # #       #########    #            # # # #       ");
-        System.out.println("             #  #  #    #######        #        #       #    ########     #  #  #       ");
-        System.out.println("             #     #    #     #        #        #       #    #            #     #       ");
-        System.out.println("             #     #    #     #        #        #       #    ########     #     #       ");
+        colorIT("\u001B[31m",
+                "             #     #       #        #     #     #       #    ########     #     #       ");
+        colorIT("\u001B[31m",
+                "             ##   ##      # #        #   #      #       #    #            ##   ##       ");
+        colorIT("\u001B[31m",
+                "             # # # #     #   #        # #       #########    #            # # # #       ");
+        colorIT("\u001B[31m",
+                "             #  #  #    #######        #        #       #    ########     #  #  #       ");
+        colorIT("\u001B[31m",
+                "             #     #    #     #        #        #       #    #            #     #       ");
+        colorIT("\u001B[31m",
+                "             #     #    #     #        #        #       #    ########     #     #       ");
+        System.out.println();
+    }
+
+    public static void drawSword() {
+        colorIT("\u001B[31m", "                 #");
+        colorIT("\u001B[31m", "                #   # ");
+        colorIT("\u001B[31m", "                 #   #");
+        colorIT("\u001B[31m", "                  #   #");
+        colorIT("\u001B[31m", "                   #   #");
+        colorIT("\u001B[31m", "                    #   #");
+        colorIT("\u001B[31m", "                     #   #");
+        colorIT("\u001B[31m", "                      #   #");
+        colorIT("\u001B[31m", "                       #   #");
+        colorIT("\u001B[31m", "                        #   #       #");
+        colorIT("\u001B[31m", "                         #   #  #");
+        colorIT("\u001B[31m", "                          ## ##");
+        colorIT("\u001B[31m", "                          #  # #     ");
+        colorIT("\u001B[31m", "                       #    #   #");
+        colorIT("\u001B[31m", "                             #   #");
+        colorIT("\u001B[31m", "                              #   #");
+        colorIT("\u001B[31m", "                               #   #");
+        colorIT("\u001B[31m", "                                #   #");
+        colorIT("\u001B[31m", "                                 #   #");
+        colorIT("\u001B[31m", "                                   ##");
         System.out.println();
     }
 
@@ -39,6 +95,7 @@ public class MysticMayhem {
     }
 
     public static void space() {
+        clear();
         System.out.println();
         for (int i = 0; i < 100; i++) {
             System.out.printf("-");
@@ -230,29 +287,21 @@ public class MysticMayhem {
 
     }
 
-    public void startGame() throws InterruptedException {
-        System.out.println("Welcome to Mystic Mayhem Game!");
-        System.out.println();
-        System.out.println();
-
-        addDemoData();
-
-        drawMytic();
-        drawMayhem();
-
+    public static void MainMenu() throws InterruptedException {
         while (true) {
+            space();
             System.out.println("\n");
-            System.out.println("\nMain Menu:");
+            Introstring("MAIN MENU");
             // System.out.println("\n-----------------
             // ----------------------------------------");
             // System.out.println();
-            space();
             System.out.println("1. Create Player");
             System.out.println("2. Select Player");
             System.out.println("3. Battle Basic with White Wolf\n");
             System.out.print("Choose an option(1/2/3): ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
+            clear();
             space();
 
             switch (choice) {
@@ -271,14 +320,39 @@ public class MysticMayhem {
                     return;
             }
         }
+    }
 
+    public void startGame() throws InterruptedException {
+        delay();
+        Introstring("WELCOME TO MYSTIC MAYHEM");
+        addDemoData();
+        drawMytic();
+        drawMayhem();
+        drawSword();
+        delay(1000);
+        clear();
+        MainMenu();
     }
 
     private static void createPlayer() {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
+        while (name.length() == 0) {
+            System.out.print("Enter a valid name");
+            delay(1000);
+            clear();
+            System.out.print("Enter name: ");
+            name = scanner.nextLine();
+        }
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
+        while (username.length() == 0) {
+            System.out.print("Enter a valid username");
+            delay(1000);
+            clear();
+            System.out.print("Enter username: ");
+            username = scanner.nextLine();
+        }
 
         while (!isUsernameUnique(username)) {
             System.out.print("Username already exist. Enter new username: ");
@@ -288,8 +362,10 @@ public class MysticMayhem {
         Player player = new Player(name, username, playerCount++);
         players.add(player);
         Introstring("PLAYER CREATED SUCCESSFULLY");
+        clear();
         // choose homeground
         System.out.println();
+        Introstring("HOME GROUND");
         System.out.println("1. Hillcrest\n2. Marshland\n3. Desert\n4. Arcane");
         System.out.println();
         System.out.printf("Choose a Homeground(1/2/3/4):");
@@ -314,7 +390,6 @@ public class MysticMayhem {
         while (true) {
             // Choose an Archer, diplay archers with their price
             // System.out.println("Choose an archer:");
-            System.out.println();
 
             ArcherTable();
             System.out.println();
@@ -347,6 +422,7 @@ public class MysticMayhem {
                 default:
                     System.out.println("Invalid choice.");
             }
+
             space();
 
             // Choose a Knight
@@ -501,16 +577,34 @@ public class MysticMayhem {
             System.out.println((i + 1) + ". " + players.get(i).getUsername());
             Thread.sleep(500);
         }
+        System.out.println("7.Exit to Main Menu");
         System.out.println();
-        System.out.print("Choose a player: ");
+        System.out.print("Choose option: ");
         int choice = scanner.nextInt();
+        if (choice == 7) {
+            MainMenu();
+        }
+        while (choice <= 0 | choice > players.size() + 1) {
+
+            Introstring("Choose a Valid Player ");
+            delay(2000);
+            space();
+            for (int i = 0; i < players.size(); i++) {
+                System.out.println((i + 1) + ". " + players.get(i).getUsername());
+                Thread.sleep(500);
+            }
+            System.out.println();
+            System.out.print("Choose a player: ");
+            choice = scanner.nextInt();
+        }
         currentPlayer = players.get(choice - 1);
         System.out.println("Player selected: " + currentPlayer.getUsername());
 
         space();
         Introstring("SELECTED PLAYER INFO");
         currentPlayer.displayInfo();
-        space();
+        System.out.println();
+        // space();
 
         while (true) {
             Introstring("PLAYER OPTIONS");
@@ -524,7 +618,7 @@ public class MysticMayhem {
                     while (true) {
                         space();
                         Introstring("WELCOME TO SHOP");
-                        System.out.println("1. Buy Character\n2. Buy Equipments\n3. Exit to Main Menu");
+                        System.out.println("1. Buy Character\n2. Buy Equipments\n3. Exit to Player Options");
                         System.out.println();
                         System.out.printf("Choose options: ");
                         int shop_option = getChoice(3);
@@ -547,6 +641,7 @@ public class MysticMayhem {
                             break;
                         }
                     }
+                    break;
 
                 case 2:
                     searchOpponent();
