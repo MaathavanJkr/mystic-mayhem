@@ -3,8 +3,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-import javax.print.DocFlavor.STRING;
-
 public class MysticMayhem {
     private static int playerCount = 0;
     protected static ArrayList<Player> players = new ArrayList<>();
