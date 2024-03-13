@@ -311,7 +311,6 @@ public class MysticMayhem {
                     break;
                 case 3:
                     battleBasicWithWhitewolf();
-                    delay(60000);
                     break;
                 default:
                     // System.out.println("Invalid choice. Please try again.");
