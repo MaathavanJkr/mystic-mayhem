@@ -13,7 +13,7 @@ public class MysticMayhem {
 
     public static void drawMytic() {
         System.out.println("#     #   #     #      ######     #########    ########       ########     ");
-        System.out.println("##   ##    #   #      #      *        #           #          #        #    ");
+        System.out.println("##   ##    #   #      #      *        #           #          #       #     ");
         System.out.println("# # # #     # #        ######         #           #          #             ");
         System.out.println("#  #  #      #                #       #           #          #             ");
         System.out.println("#     #      #         *      #       #           #          #       #     ");
@@ -295,16 +295,16 @@ public class MysticMayhem {
         int homegroundChoice = getChoice(4);
         switch (homegroundChoice) {
             case 1:
-                player.setHomeground("Hillcrest");
+                player.setHomeground(new Hillcrest());
                 break;
             case 2:
-                player.setHomeground("Marshland");
+                player.setHomeground(new Marshland());
                 break;
             case 3:
-                player.setHomeground("Desert");
+                player.setHomeground(new Desert());
                 break;
             case 4:
-                player.setHomeground("Arcane");
+                player.setHomeground(new Arcane());
                 break;
         }
 
@@ -1096,33 +1096,33 @@ public class MysticMayhem {
     private static void addDemoData() {
         Player player1 = new Player("Umen", "umen", playerCount++);
         player1.setGold(10000);
-        player1.setHomeground("Hillcrest");
+        player1.setHomeground(new Hillcrest());
         players.add(player1);
         player1.createArmy(new Shooter(), new Cavalier(), new Conjurer(), new Alchemist(), new Basilisk());
         Player player2 = new Player("Ilampoornan", "ilam", playerCount++);
         player2.setGold(10000);
-        player2.setHomeground("Marshland");
+        player2.setHomeground(new Marshland());
         players.add(player2);
         player2.createArmy(new Ranger(), new Squire(), new Eldritch(), new Lightbringer(), new Dragon());
         Player player3 = new Player("Varun", "varun", playerCount++);
         player3.setGold(10000);
-        player3.setHomeground("Desert");
+        player3.setHomeground(new Desert());
         players.add(player3);
         player3.createArmy(new Sunfire(), new Swiftblade(), new Enchanter(), new Medic(), new Hydra());
         Player player4 = new Player("Maathavan", "maathavan", playerCount++);
         player4.setGold(10000);
-        player4.setHomeground("Hillcrest");
+        player4.setHomeground(new Arcane());
         players.add(player4);
         player4.createArmy(new Saggitarius(), new Swiftblade(), new Eldritch(), new Lightbringer(), new Pegasus());
 
         Player basicPlayer = new Player("Basic", "basic", playerCount++);
-        basicPlayer.setHomeground("Hillcrest");
+        basicPlayer.setHomeground(new Hillcrest());
         players.add(basicPlayer);
         basicPlayer.createArmy(new Shooter(), new Squire(), new Warlock(), new Soother(), new Dragon());
 
         Player whitewolf = new Player("GeraltofRivia", "whitewolf", playerCount++);
         whitewolf.setGold(10000);
-        whitewolf.setHomeground("Marshland");
+        whitewolf.setHomeground(new Marshland());
         players.add(whitewolf);
         whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
         whitewolf.getArcher().setArmour(new Chainmail());
