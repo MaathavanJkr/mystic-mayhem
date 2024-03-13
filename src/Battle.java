@@ -36,7 +36,7 @@ public class Battle {
         sortArmies();
 
         System.out.println(
-                "\nBattle started between " + players.get(0).getName() + " and " + players.get(1).getName() + "\n");
+                "\n" + players.get(0).getName() + " Vs, " + players.get(1).getName() + "\n");
 
         // loop 20 times
         for (int i = 0; i < 20; i++) {

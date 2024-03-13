@@ -986,6 +986,7 @@ public class MysticMayhem {
         whitewolf.setHomeground(new Marshland());
         players.add(whitewolf);
         whitewolf.createArmy(new Ranger(), new Squire(), new Warlock(), new Medic(), new Dragon());
+        whitewolf.setGold(215);
         whitewolf.getArcher().setArmour(new Chainmail());
         whitewolf.getHealer().setArtefact(new Amulet());
 
