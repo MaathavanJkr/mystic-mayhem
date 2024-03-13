@@ -278,7 +278,7 @@ public class MysticMayhem {
         System.out
                 .printf("+-----+------------------+---------------+-----------+-------------+-----------+---------+\n");
         for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-16s  | %12s  | %7s   | %8s    | %7s   | %5s   |\n", numbers[i], archers[i],
+            System.out.printf("| %2d  |%-12s  | %12s  | %7s   | %8s    | %7s   | %5s   |\n", numbers[i], archers[i],
                     goldCoins[i], attack[i], defense[i], health[i], speed[i]);
         }
         System.out
@@ -300,7 +300,6 @@ public class MysticMayhem {
             System.out.print("Choose an option(1/2/3): ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
-            clear();
             space();
 
             switch (choice) {
@@ -312,6 +311,7 @@ public class MysticMayhem {
                     break;
                 case 3:
                     battleBasicWithWhitewolf();
+                    delay(60000);
                     break;
                 default:
                     // System.out.println("Invalid choice. Please try again.");
@@ -319,6 +319,37 @@ public class MysticMayhem {
                     return;
             }
         }
+    }
+
+    public static Character chooseCharacter(ArrayList<Character> characters) {
+        String characterType = characters.get(0).getType();
+        Introstring("SELECT " + characterType.toUpperCase());
+        System.out.printf(
+                "+-----+---------------------+----------------+-----------+-------------+-----------+---------+\n");
+        System.out.printf(
+                "+-----| %-19s |  %-12s  | %-7s   | %-8s    | %-7s   | %-5s  |\n",
+                characterType, "Gold Coins", "Attack", "Defense", "Health", "Speed");
+        System.out.printf(
+                "+-----+----------------------+---------------+-----------+-------------+-----------+---------+\n");
+        for (int i = 0; i < characters.size(); i++) {
+            Character character = characters.get(i);
+            System.out.printf("| %2d  |%-19s | %-12d  | %-7d   | %-8d    | %-7d   | %-5d   |\n",
+                    i + 1,
+                    character.getName(),
+                    character.getPrice(),
+                    (int) character.getAttack(), // Assuming getAttack() returns a double, cast to int
+                    (int) character.getDefence(), // Assuming getDefence() returns a double, cast to int
+                    (int) character.getHealth(), // Assuming getHealth() returns a double, cast to int
+                    (int) character.getSpeed() // Assuming getSpeed() returns a double, cast to int
+            );
+        }
+        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
+
+        System.out.printf("Choose an " + characterType + ":");
+
+        int choice = getChoice(characters.size());
+
+        return characters.get(choice - 1);
     }
 
     public void startGame() throws InterruptedException {
