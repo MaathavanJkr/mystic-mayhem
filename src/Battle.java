@@ -16,6 +16,19 @@ public class Battle {
     int attackPlayer;
     int defendPlayer;
 
+    // Colors
+    static String RED = "\u001B[31m";
+    static String BLUE = "\u001B[34m";
+    static String GREEN = "\u001B[32m";
+    static String YELLOW = "\u001B[33m";
+    static String ORANGE = "\033[38;5;214m";
+
+    public static void colorIT(String color, String word) {
+        String ColorCode = color;
+        String resetColorCode = "\u001B[0m";
+        System.out.println(ColorCode + word + resetColorCode);
+    }
+
     public Battle(Player player1, Player player2) {
         // this.player1 = player1;
         // this.player2 = player2;
@@ -44,7 +57,7 @@ public class Battle {
             defendPlayer = attackPlayer == 0 ? 1 : 0;
 
             // print turn and attacker name
-            System.out.println("Turn " + (i + 1) + ": " + players.get(attackPlayer).getName());
+            colorIT(BLUE, "Turn " + (i + 1) + ": " + players.get(attackPlayer).getName());
 
             Character attacker = getAttacker(armies.get(attackPlayer));
             Character defender;
@@ -67,7 +80,7 @@ public class Battle {
             System.out.println(attacker.getName() + "'s Health: " + attacker.getBattleHealth());
 
             if (defender.getBattleHealth() == 0) {
-                System.out.println(defender.getName() + " died!");
+                colorIT("\u001B[31m", defender.getName() + " died!");
                 armies.get(defendPlayer).remove(defender);
                 if (armies.get(defendPlayer).size() < 1) {
                     endBattle(attackPlayer, defendPlayer);
@@ -78,7 +91,7 @@ public class Battle {
             System.out.println("------------------------");
 
             if (homeground == "Hillcrest" && attacker.getCategory() == "Highlanders") {
-                System.out.println("Bonus Turn : " + players.get(attackPlayer).getName());
+                colorIT(GREEN, "Bonus Turn : " + players.get(attackPlayer).getName());
                 defender = getLowestHealth(armies.get(attackPlayer));
                 if (attacker instanceof Healer) {
                     defender = getLowestHealth(armies.get(attackPlayer));
@@ -93,18 +106,24 @@ public class Battle {
 
                 System.out.println("------------------------");
 
+                if (defender.getBattleHealth() == 0) {
+                    colorIT("\u001B[31m", defender.getName() + " died!");
+                    armies.get(defendPlayer).remove(defender);
+                    if (armies.get(defendPlayer).size() < 1) {
+                        endBattle(attackPlayer, defendPlayer);
+                        break;
+                    }
+                }
             }
             Thread.sleep(1000);
         }
 
         // if no one wins, print draw
         if (armies.get(0).size() != 0 && armies.get(1).size() != 0) {
-            System.out.println("Draw!");
+            colorIT(GREEN, "Draw!");
         }
 
         printStats();
-
-
 
     }
 
@@ -118,15 +137,14 @@ public class Battle {
             battleHealth = 0;
         }
         defender.setBattleHealth(battleHealth);
-        System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
+        colorIT(ORANGE, attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage");
     }
 
     public void heal(Character healer, Character toBeHealed, double factor) {
         double healHealth = roundToFirstDecimal(0.1 * healer.getBattleAttack() * factor);
         toBeHealed.setBattleHealth(roundToFirstDecimal(toBeHealed.getBattleHealth() + healHealth));
 
-        System.out
-                .println(healer.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
+        colorIT(YELLOW, healer.getName() + " heals " + toBeHealed.getName() + " with " + healHealth + " health");
     }
 
     public Character getAttacker(ArrayList<Character> army) {
@@ -252,7 +270,7 @@ public class Battle {
 
     public void printStats() {
         for (Player player : players) {
-            System.out.println(player.getName() + " XP: " + player.getXP() + " gold coins: " + player.getGold());
+            colorIT(GREEN, player.getName() + " XP: " + player.getXP() + " gold coins: " + player.getGold());
         }
     }
 
@@ -260,7 +278,7 @@ public class Battle {
         Player winner = players.get(winnerIndex);
         Player loser = players.get(loserIndex);
 
-        System.out.println(winner.getName() + " won!");
+        colorIT(GREEN, winner.getName() + " won!");
 
         winner.addXP();
         int gold = (int) Math.round(loser.getGold() * 0.1);

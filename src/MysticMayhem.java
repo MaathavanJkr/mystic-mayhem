@@ -52,52 +52,43 @@ public class MysticMayhem {
 
     public static void drawMytic() {
 
-        // ANSI escape code to reset color
-        colorIT("\u001B[35m", "#     #   #     #      ######     #########    ########       ########     ");
-        colorIT("\u001B[35m", "##   ##    #   #      #      *        #           #          #        #    ");
-        colorIT("\u001B[35m", "# # # #     # #        ######         #           #          #             ");
-        colorIT("\u001B[35m", "#     #      #         *      #       #           #          #       #     ");
-        colorIT("\u001B[35m", "#     #      #          #####         #        ########       ########     ");
-        System.out.println();
-    }
+        String[] lines = {
+            "            __  ___         __  _       __  ___          __           ",
+            "           /  |/  /_ _____ / /_(_)___  /  |/  /__ ___ __/ /  ___ __ _ ",
+            "          / /|_/ / // (_-</ __/ / __/ / /|_/ / _ `/ // / _ \\/ -_)  ' \\",
+            "         /_/  /_/\\_, /___/\\__/_/\\__/ /_/  /_/\\_,_/\\_, /_//_/\\__/_/_/_/",
+            "                /___/                            /___/                "
+        };
 
-    public static void drawMayhem() {
-        colorIT("\u001B[31m",
-                "             #     #       #        #     #     #       #    ########     #     #       ");
-        colorIT("\u001B[31m",
-                "             ##   ##      # #        #   #      #       #    #            ##   ##       ");
-        colorIT("\u001B[31m",
-                "             # # # #     #   #        # #       #########    #            # # # #       ");
-        colorIT("\u001B[31m",
-                "             #  #  #    #######        #        #       #    ########     #  #  #       ");
-        colorIT("\u001B[31m",
-                "             #     #    #     #        #        #       #    #            #     #       ");
-        colorIT("\u001B[31m",
-                "             #     #    #     #        #        #       #    ########     #     #       ");
-        System.out.println();
+        String[] colors = {
+            "\u001B[38;5;27m", // Dark blue
+            "\u001B[38;5;28m", // Blue
+            "\u001B[38;5;34m", // Green
+            "\u001B[38;5;214m", // Orange
+            "\u001B[38;5;202m", // Dark orange
+        };
+
+        for (int i = 0; i < lines.length; i++) {
+            System.out.print(colors[i % colors.length]);
+            System.out.println(lines[i]);
+        }
+        System.out.print("\u001B[0m"); // Reset color
     }
 
     public static void drawSword() {
-        colorIT("\u001B[31m", "                 #");
-        colorIT("\u001B[31m", "                #   # ");
-        colorIT("\u001B[31m", "                 #   #");
-        colorIT("\u001B[31m", "                  #   #");
-        colorIT("\u001B[31m", "                   #   #");
-        colorIT("\u001B[31m", "                    #   #");
-        colorIT("\u001B[31m", "                     #   #");
-        colorIT("\u001B[31m", "                      #   #");
-        colorIT("\u001B[31m", "                       #   #");
-        colorIT("\u001B[31m", "                        #   #       #");
-        colorIT("\u001B[31m", "                         #   #  #");
-        colorIT("\u001B[31m", "                          ## ##");
-        colorIT("\u001B[31m", "                          #  # #     ");
-        colorIT("\u001B[31m", "                       #    #   #");
-        colorIT("\u001B[31m", "                             #   #");
-        colorIT("\u001B[31m", "                              #   #");
-        colorIT("\u001B[31m", "                               #   #");
-        colorIT("\u001B[31m", "                                #   #");
-        colorIT("\u001B[31m", "                                 #   #");
-        colorIT("\u001B[31m", "                                   ##");
+        colorIT("\u001B[31m", "                         .                                               ");
+        colorIT("\u001B[31m", "                     /   ))     |\\         )               ).            ");
+        colorIT("\u001B[31m", "               c--. (\\  ( `.    / )  (\\   ( `.     ).     ( (            ");
+        colorIT("\u001B[31m", "               | |   ))  ) )   ( (   `.`.  ) )    ( (      ) )           ");
+        colorIT("\u001B[31m", "               | |  ( ( / _..----.._  ) | ( ( _..----.._  ( (            ");
+        colorIT("\u001B[31m", " ,-.           | |---) V.'-------.. `-. )-/.-' ..------ `--) \\._         ");
+        colorIT("\u001B[31m", " | /===========| |  (   |      ) ( ``-.`\\/'.-''           (   ) ``-._    ");
+        colorIT("\u001B[31m", " | | / / / / / | |--------------------->  <-------------------------_>=-");
+        colorIT("\u001B[31m", " | \\===========| |                 ..-'./\\.\\`-..                _,,-'    ");
+        colorIT("\u001B[31m", " `-'           | |-------._------''_.-'----`-._``------_.-----'          ");
+        colorIT("\u001B[31m", "               | |         ``----''            ``----''                   ");
+        colorIT("\u001B[31m", "               | |                                                         ");
+        colorIT("\u001B[31m", "               c--`                                                        ");
         System.out.println();
     }
 
@@ -245,11 +236,9 @@ public class MysticMayhem {
         delay();
         Introstring("WELCOME TO MYSTIC MAYHEM");
         addDemoData();
-        drawMytic();
-        drawMayhem();
         drawSword();
+        drawMytic();
         delay(1000);
-        clear();
         MainMenu();
     }
 
