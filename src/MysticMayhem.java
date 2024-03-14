@@ -8,6 +8,21 @@ public class MysticMayhem {
     protected static ArrayList<Player> players = new ArrayList<>();
     private static Player currentPlayer;
 
+    private static ArrayList<Character> archers = new ArrayList<Character>(
+            Arrays.asList(new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius()));
+
+    private static ArrayList<Character> knights = new ArrayList<Character>(
+            Arrays.asList(new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade()));
+
+    private static ArrayList<Character> mages = new ArrayList<Character>(
+            Arrays.asList(new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch()));
+
+    private static ArrayList<Character> healers = new ArrayList<Character>(
+            Arrays.asList(new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer()));
+
+    private static ArrayList<Character> creatures = new ArrayList<Character>(
+            Arrays.asList(new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus()));
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static void clear() {
@@ -110,129 +125,6 @@ public class MysticMayhem {
             System.out.println("Code Crashed");
         }
         System.out.flush();
-
-    }
-
-    // public static void ArcherTable() {
-    // System.out.printf("+----=+-------------+---------------+-----------+-------------+-----------+---------+\n");
-    // System.out.printf("+-----| Archers | Gold Coins | Attack | Defense | Health |
-    // Speed |\n");
-    // System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-    // // Table data
-    // System.out.printf("| 1 |Shooter | %11d | %7d | %8d | %7d | %5d |\n", 10, 20,
-    // 30, 40, 50);
-    // System.out.printf("| 2 |Ranger | %11d | %7d | %8d | %7d | %5d |\n", 15, 25,
-    // 35, 45, 55);
-    // System.out.printf("| 3 |Sunfire | %11d | %7d | %8d | %7d | %5d |\n", 20, 30,
-    // 40, 50, 60);
-    // System.out.printf("| 4 |Zing | %11d | %7d | %8d | %7d | %5d |\n", 20, 30, 40,
-    // 50, 60);
-    // System.out.printf("| 5 |Saggitarius | %11d | %7d | %8d | %7d | %5d |\n", 20,
-    // 30, 40, 50, 60);
-    // System.out.printf("+--------------+---------------+-----------+-------------+-----------+---------+\n");
-    // }
-
-    public static void ArcherTable() {
-        String[] archers = { "Shooter", "Ranger", "Sunfire", "Zing", "Saggitarius" };
-        int[] numbers = { 1, 2, 3, 4, 5 };
-        int[] goldCoins = { 80, 115, 160, 200, 230 };
-        int[] attack = { 11, 14, 15, 16, 18 };
-        int[] defense = { 4, 5, 5, 9, 7 };
-        int[] health = { 6, 8, 7, 11, 12 };
-        int[] speed = { 9, 10, 14, 14, 17 };
-        Introstring("SELECT ARCHERS");
-        System.out.printf("+----=+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        System.out.printf("+-----| Archers      |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n");
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-12s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n", numbers[i], archers[i],
-                    goldCoins[i], attack[i], defense[i], health[i], speed[i]);
-        }
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-
-    }
-
-    public static void KnightTable() {
-        String[] archers = { "Squire", "Cavalier", "Templar", "Zoro", "Swiftblade" };
-        int[] numbers = { 1, 2, 3, 4, 5 };
-        int[] goldCoins = { 85, 110, 155, 180, 250 };
-        int[] attack = { 8, 10, 14, 17, 18 };
-        int[] defense = { 9, 12, 16, 16, 20 };
-        int[] health = { 7, 7, 12, 13, 17 };
-        int[] speed = { 8, 10, 12, 14, 13 };
-        Introstring("SELECT KNIGHTS");
-        System.out.printf("+----=+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        System.out.printf("+-----| Knights      |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n");
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-12s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n", numbers[i], archers[i],
-                    goldCoins[i], attack[i], defense[i], health[i], speed[i]);
-        }
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-
-    }
-
-    public static void HealersTable() {
-        String[] archers = { "Soother", "Medic", "Alchemis", "Saint", "Lightbringer" };
-        int[] numbers = { 1, 2, 3, 4, 5 };
-        int[] goldCoins = { 95, 125, 150, 200, 260 };
-        int[] attack = { 10, 12, 13, 16, 17 };
-        int[] defense = { 8, 9, 13, 14, 15 };
-        int[] health = { 9, 10, 13, 14, 15 };
-        int[] speed = { 6, 7, 13, 9, 12 };
-        Introstring("SELECT HEALERS");
-        System.out.printf("+----=+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        System.out.printf("+-----| Healers      |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n");
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-12s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n", numbers[i], archers[i],
-                    goldCoins[i], attack[i], defense[i], health[i], speed[i]);
-        }
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-
-    }
-
-    public static void MageTable() {
-        String[] archers = { "Warlock", "Illusionist", "Enchanter", "Conjurer", "Eldritch" };
-        int[] numbers = { 1, 2, 3, 4, 5 };
-        int[] goldCoins = { 100, 120, 160, 195, 270 };
-        int[] attack = { 12, 13, 16, 18, 19 };
-        int[] defense = { 7, 8, 10, 15, 17 };
-        int[] health = { 10, 12, 13, 14, 18 };
-        int[] speed = { 12, 14, 16, 12, 14 };
-        Introstring("SELECT MAGES");
-        System.out.printf("+----=+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        System.out.printf("+-----| Mages        |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n");
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-        for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-12s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n", numbers[i], archers[i],
-                    goldCoins[i], attack[i], defense[i], health[i], speed[i]);
-        }
-        System.out.printf("+-----+--------------+---------------+-----------+-------------+-----------+---------+\n");
-
-    }
-
-    public static void MythicalCreatureTable() {
-        String[] archers = { "Dragon", "Basilisk", "Hydra", "Phoenix", "Pegasus" };
-        int[] numbers = { 1, 2, 3, 4, 5 };
-        int[] goldCoins = { 120, 165, 205, 275, 340 };
-        int[] attack = { 12, 15, 12, 17, 14 };
-        int[] defense = { 14, 11, 16, 17, 14 };
-        int[] health = { 15, 10, 15, 17, 20 };
-        int[] speed = { 8, 12, 11, 19, 20 };
-        Introstring("SELECT MYTHICAL CREATURES");
-        System.out.printf(
-                "+-----+--------------------+---------------+-----------+-------------+-----------+---------+\n");
-        System.out.printf(
-                "+-----| MythicalCreature   |  Gold Coins   | Attack    | Defense     | Health    | Speed   |\n");
-        System.out.printf(
-                "+-----+--------------------+---------------+-----------+-------------+-----------+---------+\n");
-        for (int i = 0; i < archers.length; i++) {
-            System.out.printf("| %2d  |%-16s  | %12d  | %7d   | %8d    | %7d   | %5d   |\n", numbers[i], archers[i],
-                    goldCoins[i], attack[i], defense[i], health[i], speed[i]);
-        }
-        System.out.printf(
-                "+-----+--------------------+---------------+-----------+-------------+-----------+---------+\n");
 
     }
 
@@ -417,55 +309,30 @@ public class MysticMayhem {
 
             // Choose an Archer, diplay archers with their price
             System.out.println();
-
-            ArrayList<Character> archers = new ArrayList<Character>(
-                    Arrays.asList(new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius()));
-
             Archer archer = (Archer) chooseCharacter(archers);
-
             space();
 
             // Choose a Knight
             System.out.println();
-
-            ArrayList<Character> knights = new ArrayList<Character>(
-                    Arrays.asList(new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade()));
-
             Knight knight = (Knight) chooseCharacter(knights);
-
             space();
 
-            // Choose a Mage 
+            // Choose a Mage
             System.out.println();
-
-            ArrayList<Character> mages = new ArrayList<Character>(
-                    Arrays.asList(new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch()));
-
             Mage mage = (Mage) chooseCharacter(mages);
-
             space();
 
             // Choose a Healer
             System.out.println();
-            
-            ArrayList<Character> healers = new ArrayList<Character>(
-                    Arrays.asList(new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer()));
-
             Healer healer = (Healer) chooseCharacter(healers);
-
             space();
 
             // Choose a Mythical Creature
             System.out.println();
-            
-            ArrayList<Character> creatures = new ArrayList<Character>(
-                    Arrays.asList(new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus()));
-
             MythicalCreature creature = (MythicalCreature) chooseCharacter(creatures);
-            
             space();
 
-            if (archer.price + knight.price + mage.price + healer.price + creature.price <= 500) {
+            if (archer.getPrice() + knight.getPrice() + mage.getPrice() + healer.getPrice() + creature.getPrice() <= 500) {
                 player.createArmy(archer, knight, mage, healer, creature);
                 space();
                 Introstring("PLAYER INFO");
@@ -620,148 +487,23 @@ public class MysticMayhem {
             Character buycharacter = null;
             switch (characterchoice) {
                 case 1:
-                    ArcherTable();
-                    System.out.println();
-                    System.out.printf("Choose an archer:");
-                    int archerchoice = getChoice(5);
-                    switch (archerchoice) {
-                        case 1:
-                            buycharacter = new Shooter();
-                            break;
-                        case 2:
-                            buycharacter = new Ranger();
-                            break;
-                        case 3:
-                            buycharacter = new Sunfire();
-                            break;
-                        case 4:
-                            buycharacter = new Zing();
-                            break;
-                        case 5:
-                            buycharacter = new Saggitarius();
-                            break;
-                        case 6:
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
+                    buycharacter = (Archer) chooseCharacter(archers);
                     space();
                     break;
-
                 case 2:
-
-                    KnightTable();
-                    System.out.println();
-                    System.out.printf("Choose a Knight:");
-                    int knightchoice = getChoice(5);
-                    switch (knightchoice) {
-                        case 2:
-                            buycharacter = new Cavalier();
-                            break;
-                        case 1:
-                            buycharacter = new Squire();
-                            break;
-                        case 5:
-                            buycharacter = new Swiftblade();
-                            break;
-                        case 3:
-                            buycharacter = new Templar();
-                            break;
-                        case 4:
-                            buycharacter = new Zoro();
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
+                    buycharacter = (Knight) chooseCharacter(knights);
                     space();
                     break;
-
                 case 3:
-
-                    MageTable();
-                    System.out.println();
-                    System.out.printf("Choose a Mage:");
-                    int magechoice = getChoice(5);
-                    switch (magechoice) {
-                        case 4:
-                            buycharacter = new Conjurer();
-                            break;
-                        case 5:
-                            buycharacter = new Eldritch();
-                            break;
-                        case 3:
-                            buycharacter = new Enchanter();
-                            break;
-                        case 2:
-                            buycharacter = new Illusionist();
-                            break;
-                        case 1:
-                            buycharacter = new Warlock();
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
+                    buycharacter = (Mage) chooseCharacter(mages);
                     space();
                     break;
-
                 case 4:
-
-                    HealersTable();
-                    System.out.println();
-                    System.out.printf("Choose a Healers:");
-                    int healerchoice = getChoice(5);
-                    switch (healerchoice) {
-                        case 1:
-                            buycharacter = new Soother();
-                            break;
-                        case 2:
-                            buycharacter = new Medic();
-                            break;
-                        case 3:
-                            buycharacter = new Alchemist();
-                            break;
-                        case 4:
-                            buycharacter = new Saint();
-                            break;
-                        case 5:
-                            buycharacter = new Lightbringer();
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
+                    buycharacter = (Healer) chooseCharacter(healers);
                     space();
                     break;
-
                 case 5:
-
-                    MythicalCreatureTable();
-                    System.out.println();
-                    System.out.printf("Choose a Mythical Creature:");
-                    int mystcreaturechoice = getChoice(5);
-                    switch (mystcreaturechoice) {
-                        case 1:
-                            buycharacter = new Dragon();
-                            break;
-                        case 2:
-                            buycharacter = new Basilisk();
-                            break;
-                        case 3:
-                            buycharacter = new Hydra();
-                            break;
-                        case 4:
-                            buycharacter = new Phoenix();
-                            break;
-                        case 5:
-                            buycharacter = new Phoenix();
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                            break;
-                    }
+                    buycharacter = (MythicalCreature) chooseCharacter(creatures);
                     space();
                     break;
                 case 6:
@@ -846,16 +588,15 @@ public class MysticMayhem {
                     System.out.println("Invalid choice.");
             }
             if (armour != null) {
-                // if (currentPlayer.getGold() >= armour.price) {
-                // character.setArmour(armour);
-                // currentPlayer.setGold(currentPlayer.getGold() - armour.price);
-                // System.out.println("Bought " + armour.name + " for " + armour.price + "
-                // gold.");
-                // } else {
-                // System.out.println("Not enough gold to buy " + armour.name + ".");
-                // return;
-                // }
+                if (currentPlayer.getGold() >= armour.price) {
+                    
                 shop2.buyArmour(currentPlayer, character, armour);
+                System.out.println("Bought " + armour.name + " for " + armour.price + " gold.");
+                System.out.println("Remaining Gold:" + currentPlayer.getGold());
+                } else {
+                System.out.println("Not enough gold to buy " + armour.name + ".");
+                return;
+                }
             }
 
             // choose artefact to buy from excaliber, amulet and crystal
@@ -886,9 +627,9 @@ public class MysticMayhem {
 
             if (artefact != null) {
                 if (currentPlayer.getGold() >= artefact.price) {
-                    character.setArtefact(artefact);
-                    currentPlayer.setGold(currentPlayer.getGold() - artefact.price);
+                    shop2.buyArtefact(currentPlayer, character, artefact);
                     System.out.println("Bought " + artefact.name + " for " + artefact.price + " gold.");
+                    System.out.println("Remaining Gold:" + currentPlayer.getGold());
                 } else {
                     System.out.println("Not enough gold to buy " + artefact.name + ".");
                     return;
