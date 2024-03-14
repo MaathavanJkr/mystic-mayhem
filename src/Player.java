@@ -21,6 +21,7 @@ class Player {
         this.username = username;
         this.userID = userID;
         this.gold = 500;
+        this.XP = 1;
     }
 
     public String getName() {

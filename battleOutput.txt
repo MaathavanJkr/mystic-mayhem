@@ -1,4 +1,4 @@
-Battle started between Basic and GeraltofRivia
+Basic Vs, GeraltofRivia
 
 Turn 1: Basic
 Warlock attacks Ranger for 5.4 damage
@@ -38,14 +38,14 @@ Medic's Health: 3.1
 Dragon's Health: 15.0
 ------------------------
 Turn 8: GeraltofRivia
-Medic heals Squire with 1.3 health
-Squire's Health: 8.3
-Medic's Health: 3.1
+Medic heals Medic with 1.3 health
+Medic's Health: 4.4
+Medic's Health: 4.4
 ------------------------
 Turn 9: Basic
-Soother heals Squire with 0.9 health
-Squire's Health: 7.9
-Soother's Health: 4.3
+Soother heals Soother with 0.9 health
+Soother's Health: 5.2
+Soother's Health: 5.2
 ------------------------
 Turn 10: GeraltofRivia
 Warlock attacks Soother for 5.2 damage
@@ -62,12 +62,12 @@ Medic died!
 Turn 12: GeraltofRivia
 Squire attacks Warlock for 3.1 damage
 Warlock's Health: 6.9
-Squire's Health: 8.3
+Squire's Health: 7.0
 ------------------------
 Turn 13: Basic
 Squire attacks Warlock for 3.1 damage
 Warlock's Health: 6.9
-Squire's Health: 7.9
+Squire's Health: 7.0
 ------------------------
 Turn 14: GeraltofRivia
 Dragon attacks Warlock for 4.6 damage
@@ -88,24 +88,25 @@ Warlock died!
 Turn 17: Basic
 Squire attacks Warlock for 3.1 damage
 Warlock's Health: 0.0
-Squire's Health: 7.9
+Squire's Health: 7.0
 Warlock died!
 ------------------------
 Turn 18: GeraltofRivia
 Squire attacks Squire for 2.9 damage
-Squire's Health: 5.0
-Squire's Health: 8.3
+Squire's Health: 4.1
+Squire's Health: 7.0
 ------------------------
 Turn 19: Basic
 Dragon attacks Squire for 4.4 damage
-Squire's Health: 3.9
+Squire's Health: 2.6
 Dragon's Health: 15.0
 ------------------------
 Turn 20: GeraltofRivia
 Dragon attacks Squire for 4.4 damage
-Squire's Health: 0.6
+Squire's Health: 0.0
 Dragon's Health: 15.0
+Squire died!
 ------------------------
 Draw!
-Basic XP: 0 gold coins: 20
-GeraltofRivia XP: 0 gold coins: 9455
+Basic XP: 1 gold coins: 20
+GeraltofRivia XP: 1 gold coins: 215

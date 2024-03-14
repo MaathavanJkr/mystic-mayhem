@@ -914,7 +914,7 @@ public class MysticMayhem {
                 "Mage: " + currentPlayer.getMage().getCharacterInfo(),
                 "Healer: " + currentPlayer.getHealer().getCharacterInfo(),
                 "Mythical Creature: " + currentPlayer.getMythicalCreature().getCharacterInfo(),
-                "Homeground: " + currentPlayer.getHomeground()
+                "Homeground: " + currentPlayer.getHomeground().getName()
         };
 
         for (Object informations : info) {

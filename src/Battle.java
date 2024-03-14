@@ -155,7 +155,7 @@ public class Battle {
     public Character getLowestHealth(ArrayList<Character> army) {
         Character lowestHealth = army.get(0);
         for (Character character : army) {
-            if (character.getBattleHealth() < lowestHealth.getBattleHealth() && character.getType() != "Healer") {
+            if (character.getBattleHealth() < lowestHealth.getBattleHealth()) {
                 lowestHealth = character;
             }
         }
