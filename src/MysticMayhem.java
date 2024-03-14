@@ -332,7 +332,8 @@ public class MysticMayhem {
             MythicalCreature creature = (MythicalCreature) chooseCharacter(creatures);
             space();
 
-            if (archer.getPrice() + knight.getPrice() + mage.getPrice() + healer.getPrice() + creature.getPrice() <= 500) {
+            if (archer.getPrice() + knight.getPrice() + mage.getPrice() + healer.getPrice()
+                    + creature.getPrice() <= 500) {
                 player.createArmy(archer, knight, mage, healer, creature);
                 space();
                 Introstring("PLAYER INFO");
@@ -347,18 +348,19 @@ public class MysticMayhem {
 
     private static void selectPlayer() throws InterruptedException {
         System.out.println("\n");
-        for (int i = 0; i < players.size(); i++) {
+        int playerCount = players.size();
+        for (int i = 0; i < playerCount; i++) {
             System.out.println((i + 1) + ". " + players.get(i).getUsername());
             Thread.sleep(500);
         }
-        System.out.println("7.Exit to Main Menu");
+        System.out.println((playerCount + 1) + ".Exit to Main Menu");
         System.out.println();
         System.out.print("Choose option: ");
         int choice = scanner.nextInt();
-        if (choice == 7) {
+        if (choice == (playerCount + 1)) {
             MainMenu();
         }
-        while (choice <= 0 | choice > players.size() + 1) {
+        while (choice <= 0 | choice > players.size()) {
 
             Introstring("Choose a Valid Player ");
             delay(2000);
@@ -488,23 +490,18 @@ public class MysticMayhem {
             switch (characterchoice) {
                 case 1:
                     buycharacter = (Archer) chooseCharacter(archers);
-                    space();
                     break;
                 case 2:
                     buycharacter = (Knight) chooseCharacter(knights);
-                    space();
                     break;
                 case 3:
                     buycharacter = (Mage) chooseCharacter(mages);
-                    space();
                     break;
                 case 4:
                     buycharacter = (Healer) chooseCharacter(healers);
-                    space();
                     break;
                 case 5:
                     buycharacter = (MythicalCreature) chooseCharacter(creatures);
-                    space();
                     break;
                 case 6:
                     break;
@@ -513,7 +510,20 @@ public class MysticMayhem {
                     System.out.println("Invalid choice.");
                     break;
             }
-            shop1.buyNewCharacter(currentPlayer, buycharacter);
+
+            if (currentPlayer.getGold() >= buycharacter.getPrice()) {
+
+                shop1.buyNewCharacter(currentPlayer, buycharacter);
+
+                System.out.println("Bought " + buycharacter.getName() + " for " + buycharacter.getPrice() + " gold.");
+                System.out.println("Remaining Gold:" + currentPlayer.getGold());
+            } else {
+                System.out.println("Not enough gold to buy " + buycharacter.getName() + ".");
+                return;
+            }
+
+            space();
+
             if (characterchoice == 6) {
                 break;
             }
@@ -565,6 +575,7 @@ public class MysticMayhem {
             // choose armour to buy from chainmail regalia, fleece
             ArmourTable();
             System.out.println();
+            System.out.printf("Choose 4 to skip");
             System.out.printf("Choose an Armour to buy:");
             int armourChoice = getChoice(4);
             Armour armour = null;
@@ -589,19 +600,20 @@ public class MysticMayhem {
             }
             if (armour != null) {
                 if (currentPlayer.getGold() >= armour.price) {
-                    
-                shop2.buyArmour(currentPlayer, character, armour);
-                System.out.println("Bought " + armour.name + " for " + armour.price + " gold.");
-                System.out.println("Remaining Gold:" + currentPlayer.getGold());
+
+                    shop2.buyArmour(currentPlayer, character, armour);
+                    System.out.println("Bought " + armour.name + " for " + armour.price + " gold.");
+                    System.out.println("Remaining Gold:" + currentPlayer.getGold());
                 } else {
-                System.out.println("Not enough gold to buy " + armour.name + ".");
-                return;
+                    System.out.println("Not enough gold to buy " + armour.name + ".");
+                    return;
                 }
             }
 
             // choose artefact to buy from excaliber, amulet and crystal
             ArtefactsTable();
             System.out.println();
+            System.out.printf("Choose 4 to skip");
             System.out.printf("Choose an Artefact to buy:");
             int artefactChoice = getChoice(4);
             Artefact artefact = null;
